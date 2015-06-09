@@ -8,7 +8,7 @@ app.config(function ($stateProvider) {
 
 });
 
-app.controller('LoginCtrl', function ($scope, AuthService, $state) {
+app.controller('LoginCtrl', function ($scope, AuthService, $state, $window) {
 
     $scope.login = {};
     $scope.error = null;
@@ -24,5 +24,9 @@ app.controller('LoginCtrl', function ($scope, AuthService, $state) {
         });
 
     };
+
+    $scope.redirectLogin = function(location){
+        $window.location.href = "/auth/" + location;
+    }
 
 });

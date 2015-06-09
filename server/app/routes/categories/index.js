@@ -4,18 +4,34 @@ module.exports = router;
 var _ = require('lodash');
 var mongoose = require('mongoose');
 var bodyParser = require('body-parser');
+console.log('testing');
 
-router.get('/api/getProducts/:category', function (req, res) {
+router.get('/getProducts/:category', function (req, res) {
     console.log('hitting route')
     var cat = req.params.category;
+    var params = cat ? {category: cat} : {};
     mongoose.model('Product')
-    .find({category: cat})
+    .find(params)
     .exec()
     .then(function(products){
+        console.log(products);
         res.status(200).send(products);
-    })
-    .catch(function (err) {
+    }, function(err) {
         throw 'Error retrieving a category\'s products: ' + err;
-    })
+    });
+});
 
+router.get('/search/:word', function (req, res) {
+    console.log('hitting route')
+    var word = req.params.word;
+    console.log(word);
+    mongoose.model('Product')
+    .find({title: word})
+    .exec()
+    .then(function(products){
+        console.log(products);
+        res.status(200).send(products);
+    }, function(err) {
+        throw 'Error retrieving a category\'s products: ' + err;
+    });
 });

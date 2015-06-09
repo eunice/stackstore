@@ -3,6 +3,6 @@
         Explore a vibrant creative universe
     </p>
 
-    <div ng-repeat="category in categories">{{ category.label }}</div>
+    <div class='category-header' ui-sref="categories({category: category.label })" href='{{category.label}}' ng-repeat="category in categories">{{ category.label }}</div>
 
 </section>

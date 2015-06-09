@@ -22,6 +22,7 @@ Refer to the q documentation for why and how q.invoke is used.
 var mongoose = require('mongoose');
 var connectToDb = require('./server/db');
 var User = mongoose.model('User');
+var Product = mongoose.model('Product');
 var q = require('q');
 var chalk = require('chalk');
 
@@ -29,22 +30,83 @@ var getCurrentUserData = function () {
     return q.ninvoke(User, 'find', {});
 };
 
+var getCurrentProductData = function () {
+    return q.ninvoke(Product, 'find', {});
+};
+
 var seedUsers = function () {
 
     var users = [
-        {
-            email: 'test@test.com',
-            password: 'test',
-            userType: 'user'
-        },
-        {
-            email: 'admin@test.com',
-            password: 'admin',
-            userType: 'admin'
-        }
+    {
+        email: 'test@test.com',
+        password: 'test',
+        userType: 'user'
+    },
+    {
+        email: 'admin@test.com',
+        password: 'admin',
+        userType: 'admin'
+    }
     ];
 
     return q.invoke(User, 'create', users);
+
+};
+
+var seedProducts = function () {
+
+    var products = [
+    {
+        title: 'Anna Wintour',
+        description: 'Editor-in-chief of Vogue magazine.',
+        price: 10000,
+        quantity: 1,
+        category: 'Designers',
+    },
+    {
+        title: 'Elon Musk',
+        description: 'The greatest human in the world.',
+        price: 9001,
+        quantity: 42,
+        category: 'Entrepreneurs',
+    },
+    {
+        title: 'Jay Z',
+        description: 'I got 99 problems but a glitch ain\'t one.',
+        price: 99,
+        quantity: 30,
+        category: 'Musicians',
+    },
+    {
+        title: 'Joe',
+        description: 'I have no last name.',
+        price: 500,
+        quantity: 30,
+        category: 'Teachers',
+    },
+    {
+        title: 'J. K. Rowling',
+        description: 'Give me your childhoods.',
+        price: 9.75,
+        quantity: 1000000000,
+        category: 'Writers',
+    },
+    {
+        title: 'Gordon Ramsay',
+        description: 'Hello there, I\'m Gordon Ramsay! :-) It\'s an absolute pleasure to meet you.',
+        price: 10,
+        quantity: 10,
+        category: 'Chefs',
+    },
+    {
+        title: 'Kevin Hart',
+        description: 'My name is Kevin Hart, I like to make you laugh.',
+        price: 300,
+        category: 'Comedians',
+    }
+    ];
+
+    return q.invoke(Product, 'create', products);
 
 };
 
@@ -54,6 +116,15 @@ connectToDb.then(function () {
             return seedUsers();
         } else {
             console.log(chalk.magenta('Seems to already be user data, exiting!'));
+            process.kill(0);
+        }
+    }).then(function () {
+        return getCurrentProductData()
+    }).then(function (products) {
+        if (products.length === 0) {
+            return seedProducts();
+        } else {
+            console.log(chalk.magenta('Seems to already be product data, exiting!'));
             process.kill(0);
         }
     }).then(function () {

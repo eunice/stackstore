@@ -1,18 +1,27 @@
 'use strict';
-var mongoose = require('mongoose')
-// var VIDEOS = require('./videos.json');
+var mongoose = require('mongoose');
 
 var router = require('express').Router();
 module.exports = router;
 
-router.post('/signup', function (req, res, next) {
-	var email = req.body.email;
-	var pw = req.body.password;
-    mongoose.model('User').create({
-    	email:email, 
-    	password: pw
-    }, function (err, signup) {
-    	if (err) next (err);
-    	res.send(signup);
-    });
+router.get('/findBeforeCreate', function(req, res){
+	console.log('req.query'+req.query)
+	mongoose.model('User').findOne(req.query)
+	.then(function (user) {
+            if (err) return done(err);
+            // user.correctPassword is a method from our UserModel schema.
+            if (user) return done(err);
+            // Properly authenticated.
+            else return done(null, user);
+        });
+})
+
+router.post('/', function (req, res) {
+	console.log('hit req.body'+req.body)
+    mongoose.model('User').create(req.body)
+            .then(function(signupinfo) {
+                res.send(signupinfo);
+            }, function(err){
+            	res.status(500).end();
+            })
 });

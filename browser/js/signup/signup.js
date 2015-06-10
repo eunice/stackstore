@@ -9,17 +9,26 @@ app.config(function ($stateProvider) {
 });
 
 app.controller('SignupCtrl', function ($scope, UserInfo, $state) {
-
     //Need to update this part!!!!!!!!!!!!!!
     $scope.login = {userType: "User"};
     $scope.error = null;
 
     $scope.sendLogin = function (loginInfo) {
+        console.log('loginInfo')
 
-        $scope.error = null;
+        UserInfo.checkSignUp(loginInfo.email).then (function(founduser) {
 
-        UserInfo.signUpInfo(loginInfo);
+            if(founduser){
+                $scope.error = true;
+                console.log("$scope.error")
+            }else{
+                console.log('no error')
+                UserInfo.signUpInfo(loginInfo);
+            }
+            
+        });
 
+        console.log('hit controller signup'+UserInfo.checkSignUp(loginInfo.email))
         // AuthService.login(loginInfo).then(function () {
         //     $state.go('home');
         // }).catch(function () {

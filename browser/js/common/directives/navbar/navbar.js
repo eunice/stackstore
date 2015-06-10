@@ -36,7 +36,6 @@ app.directive('navbar', function ($rootScope, AuthService, AUTH_EVENTS, $state, 
             };
 
             scope.search = function (searchWord) {
-                console.log('hitting search');
                 $state.go('search', {params: searchWord});
             };
 

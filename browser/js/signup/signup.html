@@ -1,17 +1,37 @@
     <alert type="danger" ng-show="error">
         User already exists
     </alert>
+
 <form id="login-form" name="loginForm" ng-submit="loginForm.$valid && sendLogin(login)">
 
+  <alert type="danger" ng-show="loginForm.emailField.$error.minlength || loginForm.emailField.$error.pattern" >
+      Email format invalid.
+  </alert>
+
+  <alert type="danger" ng-show="loginForm.pwField.$error.minlength">
+      Password needs to have at least 6 characters.
+  </alert>
+
+  <!-- Update later - the confirm password -->
+  <!-- <alert type="danger" ng-show="passwordMatch">
+      Password confirmation must match.
+  </alert> -->
 
     <div class="form-group">
         <label for="email">Email address</label>
-        <input type="text" ng-model="login.email" class="form-control" id="email" placeholder="Enter email">
+        <input type="text" name="emailField" required ng-minlength="7" ng-pattern="/\@/" ng-model="login.email" class="form-control" id="email" placeholder="Enter email">
     </div>
+
     <div class="form-group">
         <label for="login-password">Password</label>
-        <input type="password" ng-model="login.password" class="form-control" id="login-password" placeholder="Password">
+        <input type="password" name="pwField" required ng-minlength="6" ng-model="login.password" class="form-control" id="login-password" placeholder="Password">
     </div>
-    
+
+    <!-- Update later - the confirm password -->
+    <!-- <div class="form-group">
+        <label for="login-password-retype">Confirm Password</label>
+        <input type="password" name="pwConfirm" ng-model="login.passwordConfirm" class="form-control" id="login-password-confirm" placeholder="Password Confirmation">
+    </div> -->
+
     <button type="submit" class="btn btn-default">Submit</button>
 </form>

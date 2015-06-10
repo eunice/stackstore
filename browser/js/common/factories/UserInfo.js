@@ -8,15 +8,17 @@ app.factory('UserInfo', function ($http) {
             return $http.post('/api/signup', signupinfo).then(function(response){
                 return response.data;
             });
-        } 
+        },
 
         checkSignUp: function(email){
-        	console.log('hit checkSignUp')
-        	var queryParams = {email: email};
-        	return $http.get('/api/signup/findBeforeCreate', queryParams).then(function(response){
+        	console.log('hit checkSignUp', email)
+        	var queryParams= {};
+          queryParams.email = email;
+          //queryParams = req.query
+        	return $http.get('/api/signup/findBeforeCreate', {params: queryParams}).then(function(response){
         		return response.data;
         	})
-        	
+
         }
     };
 

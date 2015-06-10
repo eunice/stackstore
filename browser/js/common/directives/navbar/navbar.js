@@ -1,12 +1,12 @@
 'use strict';
-app.directive('navbar', function ($rootScope, AuthService, AUTH_EVENTS, $state) {
+app.directive('navbar', function ($rootScope, AuthService, AUTH_EVENTS, $state, SearchFactory) {
 
     return {
         restrict: 'E',
         scope: {},
         templateUrl: 'js/common/directives/navbar/navbar.html',
         link: function (scope) {
-
+            scope.users;
             scope.items = [
                 { label: 'Home', state: 'home' },
                 { label: 'Discover', state: 'discover' },
@@ -15,7 +15,6 @@ app.directive('navbar', function ($rootScope, AuthService, AUTH_EVENTS, $state) 
             ];
 
             scope.user = null;
-
             scope.isLoggedIn = function () {
                 return AuthService.isAuthenticated();
             };
@@ -34,6 +33,10 @@ app.directive('navbar', function ($rootScope, AuthService, AUTH_EVENTS, $state) 
 
             var removeUser = function () {
                 scope.user = null;
+            };
+
+            scope.search = function (searchWord) {
+                $state.go('search', {params: searchWord});
             };
 
             setUser();

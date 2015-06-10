@@ -2,6 +2,8 @@
 var path = require('path');
 var express = require('express');
 var app = express();
+var bodyParser = require('body-parser');
+var _ = require('lodash')
 module.exports = app;
 
 // Pass our express application pipeline into the configuration
@@ -11,7 +13,8 @@ require('./configure')(app);
 // Routes that will be accessed via AJAX should be prepended with
 // /api so they are isolated from our GET /* wildcard.
 app.use('/api', require('./routes'));
-
+app.use(bodyParser.json());
+app.use(bodyParser.urlencoded({ extended: false }));
 
 /*
     This middleware will catch any URLs resembling a file extension

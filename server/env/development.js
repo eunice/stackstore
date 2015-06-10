@@ -2,18 +2,18 @@ module.exports = {
   "DATABASE_URI": "mongodb://localhost:27017/fsg-app",
   "SESSION_SECRET": "Optimus Prime is my real dad",
   "TWITTER": {
-    "consumerKey": "INSERT_TWITTER_CONSUMER_KEY_HERE",
-    "consumerSecret": "INSERT_TWITTER_CONSUMER_SECRET_HERE",
-    "callbackUrl": "INSERT_TWITTER_CALLBACK_HERE"
+    "consumerKey": "VpL62JXrJnfB0jJZ2hZjk6b5Z",
+    "consumerSecret": "daIzJSWf6K48ka08eJeMElFI7asbCKSmGXP1s5nIuGjTmoNGmE",
+    "callbackUrl": "http://localhost:1337/auth/twitter/callback"
   },
   "FACEBOOK": {
-    "clientID": "INSERT_FACEBOOK_CLIENTID_HERE",
-    "clientSecret": "INSERT_FACEBOOK_CLIENT_SECRET_HERE",
-    "callbackURL": "INSERT_FACEBOOK_CALLBACK_HERE"
+    "clientID": "122196114778457",
+    "clientSecret": "b207e61f3274181e7d108fd82b9fb6dd",
+    "callbackURL": "http://localhost:1337/auth/facebook/callback"
   },
   "GOOGLE": {
-    "clientID": "INSERT_GOOGLE_CLIENTID_HERE",
-    "clientSecret": "INSERT_GOOGLE_CLIENT_SECRET_HERE",
-    "callbackURL": "INSERT_GOOGLE_CALLBACK_HERE"
+    "clientID": "229095526324-i5iiecg7ham8512mlsgh37qvao1pplsf.apps.googleusercontent.com",
+    "clientSecret": "tl7xEQ5viC4pHndcF3TNrz8U",
+    "callbackURL": "http://localhost:1337/auth/google/callback"
   }
 };

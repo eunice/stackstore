@@ -16,16 +16,13 @@
           <button ng-click="search(searchQuery.data)" type="submit" class="btn btn-default">Submit</button>
         </form>
 
-        <!-- Sign up Button + Sign up Page -->
-        <button ng-show="!user" ui-sref="signup" class="btn login-button">Sign up</button>
-
         <!-- Login Button + Show Login Page -->
         <button ng-show="!user" ui-sref="login" class="btn login-button">Login</button>
         <div ng-show="user" class="welcome">
             <span>Welcome, {{ user.email }}!</span>
             <a ng-click="logout()">Logout</a>
         </div>
-
+        
         <!-- Shopping cart -->
         <button ui-sref='cart' class="btn login-button glyphicon glyphicon-shopping-cart"></button>
     </div>

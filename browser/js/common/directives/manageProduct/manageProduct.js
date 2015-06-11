@@ -16,12 +16,15 @@ app.directive('manageProduct', function ($rootScope, AdminFactory, $state, GetPr
             //   { label: 'teachers'},
             //   { label: 'writers'}
             // ];
+            scope.deleteProduct = function(product){
+                AdminFactory.deleteProduct(product._id);
+            }
 
             AdminFactory.getAllProducts().then(function(products){
                 scope.products = products;
             });
 
-            
+
 
         }
     }

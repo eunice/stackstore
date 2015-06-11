@@ -5,7 +5,6 @@ var router = require('express').Router();
 module.exports = router;
 
 router.get('/products', function(req, res){
-	console.log('hit router /products')
 	mongoose.model('Product').find({})
 		.exec()
 		.then(function(products){
@@ -24,3 +23,17 @@ router.post('/', function (req, res) {
 				res.status(500).send(err.message);
       });
 });
+// function isAdmin (req, res, next) {
+// 	console.log(session);
+// 	next(); 
+// }
+router.delete('/:id', function (req, res, next) {
+	var id = req.params.id;
+	mongoose.model('Product').findOneAndRemove({_id: id})
+	.exec()
+	.then(function(product){
+		res.send(product)
+	}, next)
+
+});
+

@@ -1,13 +1,6 @@
-<form id="login-form" name="signinForm" ng-submit="signinForm.$valid && sendSignin(signin)">
-  <alert type="danger" ng-show="error">
-      User already exists
-  </alert>
+<form id="product-form" name="productForm" ng-submit="productForm.$valid && sendSignin(signin)">
 
-  <alert type="danger" ng-show="signinForm.emailField.$error.email" >
-      Email format invalid.
-  </alert>
-
-  <alert type="danger" ng-show="signinForm.pwField.$error.minlength">
+  <alert type="danger" ng-show="productForm.pwField.$error.minlength">
       Password needs to have at least 6 characters.
   </alert>
 

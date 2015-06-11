@@ -20,7 +20,7 @@ router.get('/?', function (req, res, next) {
     .exec()
     .then(function(products){
         res.status(200).send(products);
-    },next);
+    },next)
 
 });
 

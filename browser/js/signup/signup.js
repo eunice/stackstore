@@ -22,16 +22,16 @@ app.controller('SignupCtrl', function ($scope, UserInfo, $state) {
       //       return;
       //   }
 
-        console.log('loginInfo')
+        console.log('loginInfo');
         console.log('hit controller signup'+UserInfo.checkSignUp(loginInfo.email));
 
         UserInfo.checkSignUp(loginInfo.email).then (function(founduser) {
             console.log('founduser!!',founduser);
             if(founduser){
                 $scope.error = true;
-                console.log("$scope.error")
+                console.log("$scope.error");
             }else{
-                console.log('no error')
+                console.log('no error');
                 UserInfo.signUpInfo(loginInfo);
             }
 

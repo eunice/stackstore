@@ -9,7 +9,7 @@ app.config(function ($stateProvider) {
 });
 
 app.controller('CategoryController', function ($scope, $stateParams, GetProductsForCategory, LocalStorage) {
-	$scope.products;
+	$scope.products = null;
 	GetProductsForCategory.getProducts($stateParams.category)
 	.then(function (products) {
 		$scope.products = products;

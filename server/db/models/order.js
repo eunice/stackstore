@@ -9,7 +9,7 @@ var schema = new mongoose.Schema({
 		type: String,
 		required: true
 	},
-	orderDetails: {
+	items: [{
 		price: {
 			type: Number,
 			required: true
@@ -18,19 +18,17 @@ var schema = new mongoose.Schema({
 			type: Number,
 			required: true
 		},
-		cartId: {
-			type: String,
-			required: true
-		},
-	},
+		productId: {type: mongoose.Schema.Types.ObjectId, ref: 'Product'}
+	}],
 	status: {
 		type: String,
+		enum: ['PENDING', 'PROCESSED', 'REJECTED', 'CANCELLED', 'FULFILLED'],
 		required: true
 	},
 	dateCreated: {
 		type: Date,
 		default: Date.now
 	}
-})
+});
 
 mongoose.model('Order', schema);

@@ -5,14 +5,10 @@ var mongoose = require('mongoose');
 var schema = new mongoose.Schema({
     email: {
         type: String,
-        required: true,
         unique: true,
         validate: [validateEmail, 'The email supplied was invalid.']
     },
-    password: {
-        type: String,  
-        required: true
-    },
+    password: String,
     salt: {
         type: String
     },
@@ -28,12 +24,11 @@ var schema = new mongoose.Schema({
     google: {
         id: String
     },
-    userType: {
-        type: String, //user, hero, or admin.
-        required: true
-    },
+    userType: String,
+    enum: ['USER', 'ADMIN', 'HERO'],
+
     orders: [{type: mongoose.Schema.Types.ObjectId, ref: 'Order'}],
-    reviews:[{type: mongoose.Schema.Types.ObjectId, ref: 'Review'}],
+    reviews:[{type: mongoose.Schema.Types.ObjectId, ref: 'Review'}]
 });
 
 // generateSalt, encryptPassword and the pre 'save' and 'correctPassword' operations
@@ -70,6 +65,6 @@ schema.method('correctPassword', function(candidatePassword) {
 function validateEmail (email) {
     var emailRegex = /^([\w-\.]+@([\w-]+\.)+[\w-]{2,4})?$/;
     return emailRegex.test(email);
-};
+}
 
 mongoose.model('User', schema);

@@ -7,7 +7,6 @@ var bodyParser = require('body-parser');
 console.log('testing');
 
 router.get('/getProducts/:category', function (req, res) {
-    console.log('hitting route')
     var cat = req.params.category;
     var params = cat ? {category: cat} : {};
     mongoose.model('Product')

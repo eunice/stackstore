@@ -9,18 +9,17 @@ router.get('/findBeforeCreate', function(req, res){
 	mongoose.model('User').findOne({email: req.query.email})
 		.exec()
 		.then(function(user){
-			res.send(user)
+			res.send(user);
 		}, function(err) {
-			res.status(500).send(err.message)
+			res.status(500).send(err.message);
 		});
-})
+});
 
 router.post('/', function (req, res) {
-    mongoose.model('User').create(req.body)
-			.exec()
-      .then(function(signupinfo) {
+    mongoose.model('User').create(req.body).then(function(signupinfo) {
+	console.log(signupinfo)
           res.send(signupinfo);
       }, function(err){
       	res.status(500).send(err.message);
-      })
+      });
 });

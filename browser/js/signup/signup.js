@@ -10,40 +10,33 @@ app.config(function ($stateProvider) {
 
 app.controller('SignupCtrl', function ($scope, UserInfo, $state) {
     //Need to update this part!!!!!!!!!!!!!!
-    $scope.login = {userType: "User"};
+    $scope.signin = {userType: "User"};
     $scope.error = null;
+    $scope.passwordMatch = false;
 
-    $scope.sendLogin = function (loginInfo) {
+    $scope.sendSignin = function (loginInfo) {
 
-      // $scope.passwordMatch = false;
-      //
-      //   if ($scope.login.password !== $scope.login.passwordConfirm) {
-      //       $scope.passwordMatch = true;
-      //       return;
-      //   }
-
-        console.log('loginInfo');
-        console.log('hit controller signup'+UserInfo.checkSignUp(loginInfo.email));
+        if ($scope.signin.password !== $scope.passwordConfirm) {
+          console.log($scope.signin.password)
+          console.log($scope.passwordConfirm)
+            $scope.passwordMatch = true;
+            return;
+        }
 
         UserInfo.checkSignUp(loginInfo.email).then (function(founduser) {
-            console.log('founduser!!',founduser);
+          console.log('founduser', founduser);
             if(founduser){
                 $scope.error = true;
-                console.log("$scope.error");
-            }else{
-                console.log('no error');
-                UserInfo.signUpInfo(loginInfo);
-            }
 
+            }else{
+              console.log('signuppppp', loginInfo);
+                UserInfo.signUpInfo(loginInfo);
+
+            }
         });
 
-
-        // AuthService.login(loginInfo).then(function () {
-        //     $state.go('home');
-        // }).catch(function () {
-        //     $scope.error = 'Invalid login credentials.';
-        // });
-
+        $scope.signin = {userType: "User"};
+        $scope.passwordConfirm = null;
     };
 
 });

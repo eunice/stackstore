@@ -3,13 +3,17 @@ var crypto = require('crypto');
 var mongoose = require('mongoose');
 
 var schema = new mongoose.Schema({
+    displayName: {
+        type: String
+    },
     email: {
         type: String,
-        required: true,
         unique: true,
         validate: [validateEmail, 'The email supplied was invalid.']
     },
-    password: String,
+    password: {
+        type: String
+    },
     salt: {
         type: String
     },
@@ -25,9 +29,10 @@ var schema = new mongoose.Schema({
     google: {
         id: String
     },
-    userType: String,
-    enum: ['USER', 'ADMIN', 'HERO'],
-
+    userType: {
+        type: String,
+        enum: ['USER', 'ADMIN', 'HERO']
+    },
     orders: [{type: mongoose.Schema.Types.ObjectId, ref: 'Order'}],
     reviews:[{type: mongoose.Schema.Types.ObjectId, ref: 'Review'}]
 });

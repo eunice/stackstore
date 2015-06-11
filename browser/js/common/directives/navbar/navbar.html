@@ -18,11 +18,18 @@
 
         <!-- Login Button + Show Login Page -->
         <button ng-show="!user" ui-sref="login" class="btn login-button">Login</button>
+
         <div ng-show="user" class="welcome">
-            <span>Welcome, {{ user.email }}!</span>
+            <span>Welcome, {{ user.displayName }}!</span>
             <a ng-click="logout()">Logout</a>
         </div>
-        
+
+        <!-- Admin panel -->
+        <div ng-show="user" class="welcome">
+            <span>Welcome, {{ user.displayName }}!</span>
+            <a ng-click="logout()">Logout</a>
+        </div>
+
         <!-- Shopping cart -->
         <button ui-sref='cart' class="btn login-button glyphicon glyphicon-shopping-cart"></button>
     </div>

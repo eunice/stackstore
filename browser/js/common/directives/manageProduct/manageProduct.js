@@ -1,5 +1,5 @@
 'use strict';
-app.directive('manageProduct', function ($rootScope, AdminFactory, $state) {
+app.directive('manageProduct', function ($rootScope, AdminFactory, $state, GetProductsForCategory) {
 
     return {
         restrict: 'E',
@@ -7,9 +7,22 @@ app.directive('manageProduct', function ($rootScope, AdminFactory, $state) {
         templateUrl: 'js/common/directives/manageProduct/manageProduct.html',
         link: function (scope) {
 
-            AdminFactory.getProducts().then(function(product){
-                scope.products = product;
+            // scope.categories = [
+            //   { label: 'chefs'},
+            //   { label: 'comedians'},
+            //   { label: 'designers'},
+            //   { label: 'entrepreneurs'},
+            //   { label: 'musicians'},
+            //   { label: 'teachers'},
+            //   { label: 'writers'}
+            // ];
+
+            AdminFactory.getAllProducts().then(function(products){
+                scope.products = products;
             });
+
+            
+
         }
     }
             

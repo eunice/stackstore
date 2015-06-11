@@ -4,12 +4,12 @@ var mongoose = require('mongoose');
 var router = require('express').Router();
 module.exports = router;
 
-router.get('/admin', function(req, res){
-
-	mongoose.model('User').findOne({email: req.query.email})
+router.get('/products', function(req, res){
+	console.log('hit router /products')
+	mongoose.model('Product').find({})
 		.exec()
-		.then(function(user){
-			res.send(user);
+		.then(function(products){
+			res.send(products);
 		}, function(err) {
 			res.status(500).send(err.message);
 		});

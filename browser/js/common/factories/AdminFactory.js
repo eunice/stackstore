@@ -1,8 +1,8 @@
 app.factory('AdminFactory', function ($http) {
 	return {
-		getProducts: function (category) {
-			console.log('hit factory')
-			return $http.get('/api/categories/getProducts/' + category)
+		getAllProducts: function () {
+			console.log('hit factory admin product')
+			return $http.get('/api/admin/products/')
 			.then(function (response) {
 				return response.data;
 			})

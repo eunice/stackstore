@@ -5,6 +5,10 @@ var schema = new mongoose.Schema({
 		type: mongoose.Schema.Types.ObjectId,
 		required: true
 	},
+	productId: {
+		type: mongoose.Schema.Types.ObjectId,
+		required: true
+	},
 	stars: {
 		type: Number,
 		min: 1,
@@ -24,19 +28,21 @@ function reviewValidator(review) {
 
 schema.pre('save', function(next, done) {
 	var self = this;
-
-	mongoose.model('User').findbyId(self.userId)
+	mongoose.model('User').findById(self.userId)
 		.populate('orders')
 		.exec()
 		.then(function(user) {
-				if (user.orders.indexOf(self._id) === -1)
+			var items = user.orders[0].items
+				if (!JSON.stringify(items).match(self.productId))
 					next(new Error('You cannot review an item you haven\'t bought!'));
 				else {
 					user.reviews.push(self._id);
-					next();
+					user.save(function(err, user){
+						next();
+						done();
+					})
 				}
-			},
-			next);
+			});
 });
 
 mongoose.model('Review', schema);

@@ -5,8 +5,8 @@ var schema = new mongoose.Schema({
 		type: mongoose.Schema.Types.ObjectId,
 		ref: 'User'
 	},
-	userType: {
-		type: String,
+	guest: {
+		type: Boolean,
 		required: true
 	},
 	items: [{
@@ -18,7 +18,8 @@ var schema = new mongoose.Schema({
 			type: Number,
 			required: true
 		},
-		productId: {type: mongoose.Schema.Types.ObjectId, ref: 'Product'}
+		productId: {type: mongoose.Schema.Types.ObjectId, ref: 'Product'},
+		_id: false
 	}],
 	status: {
 		type: String,

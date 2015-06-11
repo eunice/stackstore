@@ -20,7 +20,8 @@ var schema = new mongoose.Schema({
     },
     category: {
         type: String,
-        required: true
+        required: true,
+        enum: ['comedians', 'chefs', 'writers', 'teachers', 'musicians', 'entrepreneurs', 'designers']
     },
     img: {
         type: String,

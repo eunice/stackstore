@@ -4,7 +4,7 @@ app.factory('SearchFactory', function($http) {
 			return $http.get('/api/products/search/' + word)
 			.then(function(response) {
 				return response.data;
-			})
+			});
 		}
-	}
-})
+	};
+});

@@ -24,19 +24,25 @@ var schema = new mongoose.Schema({
 
 function reviewValidator(review) {
 	return review.length > 0 && review.length < 2000;
-};
+}
 
 schema.pre('save', function(next, done) {
 	var self = this;
-
-	User.findbyId(self.userId)
+	mongoose.model('User').findById(self.userId)
+		.populate('orders')
 		.exec()
 		.then(function(user) {
-				if (user.reviews.indexOf(self._id) === -1)
-					next(new Error('You cannot review an item you haven\'t bought!'))
-				else next();
-			},
-			function(reason) {
-				next(new Error(reason));
+			var items = user.orders[0].items
+				if (!JSON.stringify(items).match(self.productId))
+					next(new Error('You cannot review an item you haven\'t bought!'));
+				else {
+					user.reviews.push(self._id);
+					user.save(function(err, user){
+						next();
+						done();
+					})
+				}
 			});
 });
+
+mongoose.model('Review', schema);

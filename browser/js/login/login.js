@@ -27,6 +27,6 @@ app.controller('LoginCtrl', function ($scope, AuthService, $state, $window) {
 
     $scope.redirectLogin = function(location){
         $window.location.href = "/auth/" + location;
-    }
+    };
 
 });

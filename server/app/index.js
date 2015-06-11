@@ -3,7 +3,7 @@ var path = require('path');
 var express = require('express');
 var app = express();
 var bodyParser = require('body-parser');
-var _ = require('lodash')
+var _ = require('lodash');
 module.exports = app;
 
 // Pass our express application pipeline into the configuration

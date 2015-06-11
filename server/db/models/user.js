@@ -3,15 +3,16 @@ var crypto = require('crypto');
 var mongoose = require('mongoose');
 
 var schema = new mongoose.Schema({
+    displayName: {
+        type: String
+    },
     email: {
         type: String,
-        required: true,
         unique: true,
         validate: [validateEmail, 'The email supplied was invalid.']
     },
     password: {
-        type: String,  
-        required: true
+        type: String
     },
     salt: {
         type: String
@@ -29,8 +30,7 @@ var schema = new mongoose.Schema({
         id: String
     },
     userType: {
-        type: String, //user, hero, or admin.
-        required: true
+        type: String //user, hero, or admin.
     },
     orders: [{type: mongoose.Schema.Types.ObjectId, ref: 'Order'}],
     reviews:[{type: mongoose.Schema.Types.ObjectId, ref: 'Review'}],

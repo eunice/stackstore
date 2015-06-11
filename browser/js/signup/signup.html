@@ -3,7 +3,7 @@
       User already exists
   </alert>
 
-  <alert type="danger" ng-show="signinForm.emailField.$error.minlength || signinForm.emailField.$error.pattern" >
+  <alert type="danger" ng-show="signinForm.emailField.$error.email" >
       Email format invalid.
   </alert>
 
@@ -15,10 +15,14 @@
   <alert type="danger" ng-show="passwordMatch">
       Password confirmation must match.
   </alert>
+    <div class="form-group">
+        <label for="name">Name</label>
+        <input type="text" name="name" ng-model="signin.displayName" class="form-control" id="signin-name" placeholder="Enter name">
+    </div>
 
     <div class="form-group">
         <label for="email">Email address</label>
-        <input type="text" name="emailField" required ng-minlength="7" ng-pattern="/\@/" ng-model="signin.email" class="form-control" id="signin-email" placeholder="Enter email">
+        <input type="email" name="emailField" ng-model="signin.email" class="form-control" id="signin-email" placeholder="Enter email">
     </div>
 
     <div class="form-group">

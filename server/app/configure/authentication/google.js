@@ -27,7 +27,10 @@ module.exports = function (app) {
                 UserModel.create({
                     google: {
                         id: profile.id
-                    }
+                    },
+                    displayName: profile.displayName,
+                    userType: "User",
+                    email: profile.emails[0].value
                 }).then(function (user) {
                     done(null, user);
                 }, function (err) {

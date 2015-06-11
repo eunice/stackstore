@@ -16,10 +16,11 @@ router.get('/findBeforeCreate', function(req, res){
 });
 
 router.post('/', function (req, res) {
-    mongoose.model('User').create(req.body).then(function(signupinfo) {
-	console.log(signupinfo)
+    mongoose.model('User').create(req.body)
+		.then(function(signupinfo) {
           res.send(signupinfo);
       }, function(err){
-      	res.status(500).send(err.message);
+				console.log(err)
+				res.status(500).send(err.message);
       });
 });

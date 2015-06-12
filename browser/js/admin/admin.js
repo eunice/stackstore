@@ -6,37 +6,36 @@ app.config(function ($stateProvider) {
         controller: 'AdminCtrl'
     });
 
-});
+    $stateProvider.state('adminOnly.products', {
+        url: '/products',
+        templateUrl: 'js/admin/template/manageProducts.html',
+        controller: 'ManageProductsCtrl'
+    });
 
-app.controller('AdminCtrl', function ($scope, AdminFactory, $state) {
-    //Need to update this part!!!!!!!!!!!!!!
-    // $scope.signin = {userType: "User"};
-    // $scope.error = null;
-    // $scope.passwordMatch = false;
+    //make changes here!
+    $stateProvider.state('adminOnly.products.create', {
+        url: '/products',
+        templateUrl: 'js/admin/template/createProducts.html',
+        controller: 'ManageProductsCtrl'
+    });
 
-    // $scope.sendSignin = function (loginInfo) {
+    $stateProvider.state('adminOnly.products.edit', {
+        url: '/products',
+        templateUrl: 'js/admin/template/editProducts.html',
+        controller: 'ManageProductsCtrl'
+    });
 
-    //     if ($scope.signin.password !== $scope.passwordConfirm) {
-    //       console.log($scope.signin.password)
-    //       console.log($scope.passwordConfirm)
-    //         $scope.passwordMatch = true;
-    //         return;
-    //     }
 
-    //     UserInfo.checkSignUp(loginInfo.email).then (function(founduser) {
-    //       console.log('founduser', founduser);
-    //         if(founduser){
-    //             $scope.error = true;
+    $stateProvider.state('adminOnly.orders', {
+        url: '/orders',
+        templateUrl: 'js/admin/template/manageOrders.html',
+        controller: 'ManageOrdersCtrl'
+    });
 
-    //         }else{
-    //           console.log('signuppppp', loginInfo);
-    //             UserInfo.signUpInfo(loginInfo);
-
-    //         }
-    //     });
-
-    //     $scope.signin = {userType: "User"};
-    //     $scope.passwordConfirm = null;
-    // };
+    $stateProvider.state('adminOnly.users', {
+        url: '/users',
+        templateUrl: 'js/admin/template/manageUsers.html',
+        controller: 'ManageUsersCtrl'
+    });
 
 });

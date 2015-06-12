@@ -40,12 +40,12 @@ var seedUsers = function () {
     {
         email: 'test@test.com',
         password: 'test',
-        userType: 'user'
+        userType: 'User'
     },
     {
         email: 'admin@test.com',
         password: 'admin',
-        userType: 'admin'
+        userType: 'Admin'
     }
     ];
 

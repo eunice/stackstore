@@ -6,13 +6,13 @@ app.config(function ($stateProvider) {
         controller: 'AdminCtrl'
     });
 
+    //Product Control
     $stateProvider.state('adminOnly.products', {
         url: '/products',
         templateUrl: 'js/admin/template/manageProducts.html',
         controller: 'ManageProductsCtrl'
     });
 
-    //make changes here!
     $stateProvider.state('adminOnly.products.create', {
         url: '/products',
         templateUrl: 'js/admin/template/createProducts.html',
@@ -32,6 +32,7 @@ app.config(function ($stateProvider) {
         controller: 'ManageOrdersCtrl'
     });
 
+    //User Control
     $stateProvider.state('adminOnly.users', {
         url: '/users',
         templateUrl: 'js/admin/template/manageUsers.html',

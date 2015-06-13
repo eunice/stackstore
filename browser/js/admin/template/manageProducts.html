@@ -6,18 +6,20 @@
 	<button type="button" class="btn btn-default btn-lg" ui-sref=".create" ng-click="showForm=true">
 	  <span class="glyphicon glyphicon-star" aria-hidden="true"></span> Create
 	</button>
-	<button type="button" class="btn btn-default btn-lg">
+	<button type="button" class="btn btn-default btn-lg" ng-click="getAll()">
 	  <span class="glyphicon glyphicon-star" aria-hidden="true"></span> Show All Products
 	</button>
 
-	<div class="btn-group">
+	<!-- <div class="btn-group">
 	  <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-expanded="false">
 	    Categories <span class="caret"></span>
-	  </button>
-		<select>
-			<option ng-repeat="category in categories"> {{category.label}} </option>
+	  </button> -->
+
+		<select ng-model="selectCategory">
+			<option ng-repeat="category in categories" ng-selected="selectCategory">{{category.label}}</option>
 		</select>
-	</div>
+		<button ng-click="getCategory(selectCategory)">Go</button>
+</div>
 </div>
 
 <br>

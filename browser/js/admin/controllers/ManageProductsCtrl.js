@@ -6,6 +6,7 @@ app.controller('ManageProductsCtrl', function ($scope, AdminFactory, $state) {
       $scope.products = products;
   });
 
+
   $scope.categories = [
     { label: 'chefs'},
     { label: 'comedians'},
@@ -23,6 +24,22 @@ app.controller('ManageProductsCtrl', function ($scope, AdminFactory, $state) {
     quantity: null,
     category: null,
     img: null
+  }
+
+  $scope.selectCategory = null;
+
+  $scope.getAll = function () {
+    $scope.getCategory()
+  }
+
+  $scope.getCategory = function(category) {
+    console.log('getCategory', category)
+
+    AdminFactory.getProducts(category).then(function(product) {
+      console.log('display product', product)
+      $scope.products = product;
+    })
+
   }
 
   $scope.createProduct = function(product) {
@@ -43,8 +60,10 @@ app.controller('ManageProductsCtrl', function ($scope, AdminFactory, $state) {
 
   $scope.getEditProduct = function(product) {
     $scope.showForm = true;
-    console.log('get edit product', productModel.title)
+    $scope.editProductId = product._id
+    console.log('get edit product', product.title)
 
+    //populate the $scope.product
     $scope.productModel = {
       title: product.title,
       description: product.description,
@@ -53,14 +72,17 @@ app.controller('ManageProductsCtrl', function ($scope, AdminFactory, $state) {
       category: product.category,
       img: null
     }
-    // AdminFactory.getProducts(product._id)
+
     $state.go('adminOnly.products.edit')
-     console.log('this is scope.productmodel', $scope.productModel)
   }
 
   $scope.editProduct = function(product) {
-    //retrieve product info
-    //populate the $scope.product
+    //retrieve only the updated product info!
+    var id = $scope.editProductId
+
+    {category: comedian, price: 23423}
+    AdminFactory.editProduct(id, product);
+
   }
 
   $scope.deleteProduct = function(product){

@@ -11,18 +11,18 @@ router.use(function (req, res, next) {
 	else res.status(401).send('No authenticated admin')
 })
 
-router.get('/products/', function(req, res){
+router.get('/products/', function(req, res, next){
 	console.log('getproduct route', req.query)
 	// var id = req.params.id ? {_id: req.params.id} : {};
-	var params = req.query.productid ? {_id: req.query.productid } : {};
+	var params = req.query.category ? {category: req.query.category } : {};
+
+	// params = {category: "comedian" }
 
 	mongoose.model('Product').find(params)
 		.exec()
 		.then(function(products){
 			res.send(products);
-		}, function(err) {
-			res.status(500).send(err.message);
-		});
+		}, next);
 });
 
 router.delete('/products/:id', function (req, res, next) {
@@ -36,13 +36,21 @@ router.delete('/products/:id', function (req, res, next) {
 
 });
 
-router.post('/products', function (req, res) {
+router.post('/products', function (req, res, next) {
 	// console.log('hit create product route', req.body)
     mongoose.model('Product').create(req.body)
 		.then(function(productinfo) {
           res.send(productinfo);
-      }, function(err){
-				console.log(err)
-				res.status(500).send(err.message);
-      });
+      }, next);
 });
+
+router.put('/products/:id', function(req, res, next) {
+	var id = req.params.id;
+	console.log('editproduct route', req.body)
+	
+	mongoose.model('Product').findOneAndUpdate({_id: id}, req.body)
+		.exec()
+		.then(function(product){
+			res.send(product)
+		}, next);
+})

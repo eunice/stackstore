@@ -1,0 +1,38 @@
+<ui-view ng-show="showForm"></ui-view>
+
+<div ng-hide="showForm">
+<div>
+	<br>
+	<button type="button" class="btn btn-default btn-lg" ui-sref=".create" ng-click="showForm=true">
+	  <span class="glyphicon glyphicon-star" aria-hidden="true"></span> Create
+	</button>
+	<button type="button" class="btn btn-default btn-lg" ng-click="getAll()">
+	  <span class="glyphicon glyphicon-star" aria-hidden="true"></span> Show All Users
+	</button>
+
+	<!-- <div class="btn-group">
+	  <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-expanded="false">
+	    Categories <span class="caret"></span>
+	  </button> -->
+
+		<select ng-model="selectCategory">
+			<option ng-repeat="category in categories" ng-selected="selectCategory">{{category.label}}</option>
+		</select>
+		<button ng-click="getCategory(selectCategory)">Go</button>
+</div>
+</div>
+
+<br>
+
+<table class="table table-striped"  >
+	<tr ng-repeat='user in users track by $index'>
+		<td>{{ user.displayName }}</td>
+		<td>{{ user.userType }}</td>
+		<td>{{ user.email }}</td>
+		<td>{{ user.facebook.id }}</td>
+    <td>{{ user.google.id }}</td>
+		<td class="fa fa-pencil" ng-click="getEditProduct(product)" ui-sref=".edit"> Edit </td>
+		<td class="fa fa-trash-o" ng-click="deleteProduct(product)"> Delete</td>
+	</tr>
+</table>
+</div>

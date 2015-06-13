@@ -6,15 +6,22 @@ var mongoose = require('mongoose');
 var bodyParser = require('body-parser');
 
 router.post('/', function (req, res, next) {
+    var items = req.body.cart;
+    var guestInfo = req.body.guest;
     var cart = {
         items: [],
         userId: req.user ? req.user._id : null,
         guest: !req.user,
         status: 'PENDING'
     };
+    if (guestInfo) {
+        cart.shippingAddress = guestInfo.shippingAddress;
+        cart.email = guestInfo.email;
+        cart.creditCard = guestInfo.creditCard;
+    }
 
     mongoose.model('Product').find({
-        '_id': { $in: Object.keys(req.body)}
+        '_id': { $in: Object.keys(items)}
     })
     .exec()
     .then(function (products) {
@@ -22,7 +29,7 @@ router.post('/', function (req, res, next) {
             cart.items.push({
                 price: product.price,
                 productId: product._id,
-                quantity: req.body[product._id]
+                quantity: items[product._id]
             })
         })
     })

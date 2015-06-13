@@ -79,7 +79,8 @@ var seedProducts = function () {
         description: 'Editor-in-chief of Vogue magazine.',
         price: 10000,
         quantity: 1,
-        category: 'designers'
+        category: 'designers',
+        img: "https://nyppagesix.files.wordpress.com/2014/08/wintour2.jpg"
     },
     {
         title: 'Elon Musk',
@@ -93,34 +94,39 @@ var seedProducts = function () {
         description: 'I got 99 problems but a glitch ain\'t one.',
         price: 99,
         quantity: 30,
-        category: 'musicians'
+        category: 'musicians',
+        img: "http://upload.wikimedia.org/wikipedia/commons/9/9c/Jay-Z_@_Shawn_'Jay-Z'_Carter_Foundation_Carnival_(crop_2).jpg"
     },
     {
         title: 'Joe',
         description: 'I have no last name.',
         price: 500,
         quantity: 30,
-        category: 'teachers'
+        category: 'teachers',
+        img: 'http://www.fullstackacademy.com/img/team/joe_alves.jpg'
     },
     {
         title: 'J. K. Rowling',
         description: 'Give me your childhoods.',
         price: 9.75,
         quantity: 1000000000,
-        category: 'writers'
+        category: 'writers',
+        img: 'http://ilarge.lisimg.com/image/7955742/1118full-j.k.-rowling.jpg'
     },
     {
         title: 'Gordon Ramsay',
         description: 'Hello there, I\'m Gordon Ramsay! :-) It\'s an absolute pleasure to meet you.',
         price: 10,
         quantity: 10,
-        category: 'chefs'
+        category: 'chefs',
+        img: 'http://i.forbesimg.com/media/lists/people/gordon-ramsay_416x416.jpg'
     },
     {
         title: 'Kevin Hart',
         description: 'My name is Kevin Hart, I like to make you laugh.',
         price: 300,
-        category: 'comedians'
+        category: 'comedians',
+        img: 'http://upload.wikimedia.org/wikipedia/commons/b/ba/Kevin_Hart_2014.jpg'
     },
     {
         title: 'Scarlett Johansson',
@@ -133,7 +139,8 @@ var seedProducts = function () {
         title: 'Andy Murray',
         description: 'Getting closer...',
         price: 1000,
-        category: 'athletes'
+        category: 'athletes',
+        img: 'http://www.independent.co.uk/incoming/article8439386.ece/alternates/w620/andy-murray-GETTY.jpg'
     }
     ];
 

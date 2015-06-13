@@ -1,14 +1,14 @@
 app.config(function ($stateProvider) {
 
-    $stateProvider.state('cart', {
-        url: '/cart',
-        controller: 'CartController',
-        templateUrl: 'js/cart/cart.html'
-    });
+	$stateProvider.state('cart', {
+		url: '/cart',
+		controller: 'CartController',
+		templateUrl: 'js/cart/cart.html'
+	});
 
 });
 
-app.controller('CartController', function ($scope, $stateParams, GetProductsForCategory, LocalStorage, AuthService, $state) {
+app.controller('CartController', function ($scope, $stateParams, GetProductsForCategory, LocalStorage, AuthService, $state, $modal) {
 	$scope.productIds = LocalStorage.getCart();
 	$scope.idArray = Object.keys($scope.productIds);
 	$scope.products = null;
@@ -28,14 +28,17 @@ app.controller('CartController', function ($scope, $stateParams, GetProductsForC
 	$scope.checkout = function () {
 		AuthService.getLoggedInUser()
 		.then(function (user){
-			return LocalStorage.checkoutCart();
+			if (!user) return $scope.open();
+
+			else LocalStorage.checkoutCart()
+			.then (function (cart) {
+				console.log(cart);
+				$scope.cart = cart;
+				$scope.ordered = true;
+				sumPrice();
+			})
 		})
-		.then (function (cart) {
-			console.log(cart);
-			$scope.cart = cart;
-			$scope.ordered = true;
-			sumPrice();
-		})
+		
 	};
 
 	function sumPrice () {
@@ -47,4 +50,28 @@ app.controller('CartController', function ($scope, $stateParams, GetProductsForC
 			})
 		})
 	}
+
+	$scope.animationsEnabled = true;
+
+	$scope.open = function (size) {
+
+		var modalInstance = $modal.open({
+			animation: $scope.animationsEnabled,
+			templateUrl: 'js/cart/modal/modal.html',
+			controller: 'GuestController',
+			size: 'lg',
+			resolve: {
+				items: function () {
+					return $scope.items;
+				}
+			}
+		});
+
+		modalInstance.result.then(function (selectedItem) {
+			$scope.selected = selectedItem;
+		}, function () {
+			// $log.info('Modal dismissed at: ' + new Date());
+		});
+	};
+
 });

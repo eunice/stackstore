@@ -25,7 +25,7 @@ var schema = new mongoose.Schema({
     },
     img: {
         type: String,
-        default: '/images/elon.png'
+        default: 'http://blogs-images.forbes.com/briansolomon/files/2014/05/elon-musk-portrait-e1399572239766.jpg'
     },
     hero: {
         type: mongoose.Schema.Types.ObjectId,

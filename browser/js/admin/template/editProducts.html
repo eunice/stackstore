@@ -1,4 +1,4 @@
-<form id="product-form" name="productForm" ng-submit="productForm.$valid && editProduct(productModel)">
+<!-- <form id="product-form" name="productForm" ng-submit="productForm.$valid && editProduct(productModel)"> -->
 
   <!-- Alert  -->
   <!-- <alert type="danger" ng-show="productForm.pwField.$error.minlength">
@@ -9,32 +9,32 @@
       Password confirmation must match.
   </alert> -->
 
-    <div class="form-group">
+    <div>
         <label for="title">Title</label>
-        <input type="text" name="title" ng-model="productModel.title" class="form-control" id="product-title" value="{{productModel.title}}" placeholder="Title">
+        <li contentEditable="true" ng-model="productModel.title" id="product-title">{{productModel.title}}</li>
     </div>
 
-    <div class="form-group">
+    <div>
         <label for="description">Description</label>
-        <input type="text" name="description" ng-model="productModel.description" class="form-control" id="product-description" value="{{productModel.description}}" placeholder="Description">
+        <li contentEditable="true" ng-model="productModel.description" id="product-description">{{productModel.desctiption}}</li>
     </div>
 
-    <div class="form-group">
+    <div>
         <label for="price">Price</label>
-        <input type="number" name="price" ng-model="productModel.price" class="form-control" id="product-price" value="{{productModel.price}}" placeholder="Price">
+        <li contentEditable="true" ng-model="productModel.price" id="product-price">{{productModel.price}}</li>
     </div>
 
-    <div class="form-group">
+    <div>
         <label for="quantity">Quantity</label>
-        <input type="number" name="quantity" ng-model="productModel.quantity" class="form-control" id="product-quantity" value="{{productModel.quantity}}" placeholder="Quantity">
+        <li contentEditable="true" ng-model="productModel.quantity" id="product-quantity">{{productModel.quantity}}</li>
     </div>
 
-    <div class="form-group">
+    <div>
         <label for="category">Category</label>
-        <input type="text" name="category" ng-model="productModel.category" class="form-control" id="product-category" value="{{productModel.category}}" placeholder="Category">
+        <li contentEditable="true" ng-model="productModel.category" id="product-category">{{productModel.category}}</li>
     </div>
 
     <div>Upload image here</div>
 
     <button type="submit" class="btn btn-default">Submit</button>
-</form>
+<!-- </form> -->

@@ -43,7 +43,7 @@ app.controller('ManageProductsCtrl', function ($scope, AdminFactory, $state) {
 
   $scope.getEditProduct = function(product) {
     $scope.showForm = true;
-    console.log('get edit product', product)
+    console.log('get edit product', productModel.title)
 
     $scope.productModel = {
       title: product.title,
@@ -53,8 +53,9 @@ app.controller('ManageProductsCtrl', function ($scope, AdminFactory, $state) {
       category: product.category,
       img: null
     }
-
-    AdminFactory.getProducts(product._id)
+    // AdminFactory.getProducts(product._id)
+    $state.go('adminOnly.products.edit')
+     console.log('this is scope.productmodel', $scope.productModel)
   }
 
   $scope.editProduct = function(product) {
@@ -64,6 +65,7 @@ app.controller('ManageProductsCtrl', function ($scope, AdminFactory, $state) {
 
   $scope.deleteProduct = function(product){
     console.log('deleteproduct', product)
+
       AdminFactory.deleteProduct(product._id);
   }
 

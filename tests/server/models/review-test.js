@@ -33,7 +33,7 @@ describe('User model', function () {
 			User.create({ 
 				email: 'obama@gmail.com', 
 				password: 'potus', 
-				userType: 'admin' 
+				userType: 'Admin' 
 			})
 			.then(function(user) {
 				Product.create({

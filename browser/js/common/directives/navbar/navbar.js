@@ -39,6 +39,10 @@ app.directive('navbar', function ($rootScope, AuthService, AUTH_EVENTS, $state, 
                 $state.go('search', {params: searchWord});
             };
 
+            scope.profile = function (id) {
+                $state.go('Profile', {id: id})
+            }
+
             setUser();
 
             $rootScope.$on(AUTH_EVENTS.loginSuccess, setUser);

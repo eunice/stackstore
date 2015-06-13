@@ -18,7 +18,9 @@ app.controller('DiscoverController', function ($scope) {
       { label: 'entrepreneurs'},
       { label: 'musicians'},
       { label: 'teachers'},
-      { label: 'writers'}
+      { label: 'writers'},
+      { label: 'actors'},
+      { label: 'athletes'}
     ];
 
 });

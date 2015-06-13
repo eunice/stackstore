@@ -40,12 +40,30 @@ var seedUsers = function () {
     {
         email: 'test@test.com',
         password: 'test',
-        userType: 'user'
+        displayName: 'Test User',
+        userType: 'User'
     },
     {
         email: 'admin@test.com',
+        displayName: 'Admin User',
         password: 'admin',
-        userType: 'admin'
+        userType: 'Admin'
+    },
+    {
+        email: 'elon@test.com',
+        password: 'elon',
+        userType: 'Hero',
+        displayName: 'Elon Musk',
+        description: 'Elon Musk was born in South Africa and became a multimillionaire in his late twenties when he sold his start-up company, Zip2, to a division of Compaq Computers. He went on to more early success launching PayPal via a 2000 merger, Space Exploration Technologies Corp. (SpaceX) in 2002, and Tesla Motors in 2003. Musk made headlines in May 2012 when SpaceX launched a rocket that would send the first commercial vehicle to the International Space Station. He currently holds the occupation of greatest man in the world.',
+        photo: 'http://www.themotorreport.com.au/content/image/e/l/elon_musk-0114-mc:819x819.jpg'
+    },
+    {
+        email: 'jamie@test.com',
+        password: 'jamie',
+        userType: 'Hero',
+        displayName: 'Jamie Shen',
+        description: 'Yo yo yo I\'m Jamie Shen, I like to pick up all the hens.',
+        photo: 'https://lh3.googleusercontent.com/6MZqccmjwZV9OhfFUsR5t9nIYF4PTTPyP2-dNk5qhIE=w466-h828-no'
     }
     ];
 
@@ -61,48 +79,61 @@ var seedProducts = function () {
         description: 'Editor-in-chief of Vogue magazine.',
         price: 10000,
         quantity: 1,
-        category: 'designers',
+        category: 'designers'
     },
     {
         title: 'Elon Musk',
         description: 'The greatest human in the world.',
         price: 9001,
         quantity: 42,
-        category: 'entrepreneurs',
+        category: 'entrepreneurs'
     },
     {
         title: 'Jay Z',
         description: 'I got 99 problems but a glitch ain\'t one.',
         price: 99,
         quantity: 30,
-        category: 'musicians',
+        category: 'musicians'
     },
     {
         title: 'Joe',
         description: 'I have no last name.',
         price: 500,
         quantity: 30,
-        category: 'teachers',
+        category: 'teachers'
     },
     {
         title: 'J. K. Rowling',
         description: 'Give me your childhoods.',
         price: 9.75,
         quantity: 1000000000,
-        category: 'writers',
+        category: 'writers'
     },
     {
         title: 'Gordon Ramsay',
         description: 'Hello there, I\'m Gordon Ramsay! :-) It\'s an absolute pleasure to meet you.',
         price: 10,
         quantity: 10,
-        category: 'chefs',
+        category: 'chefs'
     },
     {
         title: 'Kevin Hart',
         description: 'My name is Kevin Hart, I like to make you laugh.',
         price: 300,
-        category: 'comedians',
+        category: 'comedians'
+    },
+    {
+        title: 'Scarlett Johansson',
+        description: 'i am beautiful.',
+        price: 999999,
+        category: 'actors',
+        img: 'http://si.wsj.net/public/resources/images/BN-BY925_mag041_OZ_20140318165119.jpg'
+    },
+    {
+        title: 'Andy Murray',
+        description: 'Getting closer...',
+        price: 1000,
+        category: 'athletes'
     }
     ];
 

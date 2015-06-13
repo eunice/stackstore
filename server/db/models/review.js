@@ -31,7 +31,7 @@ schema.pre('save', function(next, done) {
 	mongoose.model('User').findById(self.userId)
 		.populate('orders')
 		.exec()
-		.then(function(user) {
+		.then(function (user) {
 			var items = user.orders[0].items
 				if (!JSON.stringify(items).match(self.productId))
 					next(new Error('You cannot review an item you haven\'t bought!'));

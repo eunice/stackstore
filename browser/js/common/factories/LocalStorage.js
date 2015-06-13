@@ -1,4 +1,4 @@
-app.factory('LocalStorage', function (locker) {
+app.factory('LocalStorage', function (locker, $http) {
 	return {
 		addItemToCart: function (item) {
 			var cart = locker.get('cart');
@@ -13,6 +13,12 @@ app.factory('LocalStorage', function (locker) {
 		},
 		getCart: function () {
 			return locker.get('cart');
+		},
+		checkoutCart: function (user) {
+			return $http.post('/api/cart', locker.get('cart'))
+			.then(function (response) {
+				return response.data;
+			})
 		}
 	};
 });

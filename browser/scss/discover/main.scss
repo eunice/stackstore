@@ -2,8 +2,30 @@
 	text-transform: capitalize;
 	font-weight: bold;
 	font-size: 1.5em;
+	height: 220px;
+	font-size: 2em;
+	text-align: center;
+	&:hover {
+		color: $cyan;
+		cursor: pointer;
+	}
+	line-height: 200px;
 }
 
 li {
 	list-style-type: none;
 }
+
+#discover-title {
+	text-align: center;
+	font-weight: bold;
+	padding: none;
+}
+
+
+#wrapper {
+	margin: 10px;
+	width: 100%;
+}
+
+

@@ -1,3 +1,4 @@
+@import 'variables';
 * {
   box-sizing: border-box;
 }
@@ -10,13 +11,19 @@
   }
 }
 
-body {
-	font-family: 'Quicksand', sans-serif;
+::selection {
+	color: $cyan;
 }
 
+body {
+	font-family: 'Quicksand', sans-serif;
+	background-color: $background;
+}
 @import 'directives/main';
 @import 'home/main';
 @import 'about/main';
 @import 'tutorial/main';
 @import 'login/main';
+@import 'categories/main';
 @import 'discover/main';
+@import 'profile/main';

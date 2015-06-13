@@ -18,7 +18,10 @@ var schema = new mongoose.Schema({
 			type: Number,
 			required: true
 		},
-		productId: {type: mongoose.Schema.Types.ObjectId, ref: 'Product'},
+		productId: {
+			type: mongoose.Schema.Types.ObjectId,
+			ref: 'Product'
+		},
 		_id: false
 	}],
 	status: {

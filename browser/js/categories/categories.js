@@ -9,18 +9,15 @@ app.config(function ($stateProvider) {
 });
 
 app.controller('CategoryController', function ($scope, $stateParams, GetProductsForCategory, LocalStorage) {
-	$scope.products;
-	GetProductsForCategory.getProducts($stateParams.category)
+	$scope.products = null;
+	GetProductsForCategory.getProducts({'category':$stateParams.category})
+
 	.then(function (products) {
+		console.log
 		$scope.products = products;
 	});
-	// $scope.deleted = false;
 	$scope.addItem = function (item) {
 		return LocalStorage.addItemToCart(item);
-		// return localStorageService.set('cart', item);
 	};
 
-	// function addToCart (item) {
-	// 	return localStorageService.set('cart', item);
-	// }
 });

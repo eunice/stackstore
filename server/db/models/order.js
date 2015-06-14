@@ -9,6 +9,7 @@ var schema = new mongoose.Schema({
 		type: Boolean,
 		required: true
 	},
+
 	email: {
 		type: String
 	},
@@ -18,6 +19,7 @@ var schema = new mongoose.Schema({
 	creditCard: {
 		type: String
 	},
+
 	items: [{
 		price: {
 			type: Number,
@@ -27,11 +29,12 @@ var schema = new mongoose.Schema({
 			type: Number,
 			required: true
 		},
+
 		productId: {
 			type: mongoose.Schema.Types.ObjectId,
 			ref: 'Product'
-		},
-		_id: false
+		}
+
 	}],
 	status: {
 		type: String,

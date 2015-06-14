@@ -11,7 +11,7 @@ app.config(function ($stateProvider) {
 app.controller('CartController', function ($scope, $stateParams, GetProductsForCategory, LocalStorage) {
 	$scope.productIds = LocalStorage.getCart();
 	$scope.idArray = Object.keys($scope.productIds);
-	$scope.products;
+	$scope.products = null;
 
 	$scope.removeItem = function (itemId) {
 		LocalStorage.removeItemFromCart(itemId);

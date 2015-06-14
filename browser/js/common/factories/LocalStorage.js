@@ -14,5 +14,5 @@ app.factory('LocalStorage', function (locker) {
 		getCart: function () {
 			return locker.get('cart');
 		}
-	}
-})
+	};
+});

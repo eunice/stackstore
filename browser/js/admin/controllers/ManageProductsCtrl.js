@@ -90,35 +90,6 @@ app.controller('ManageProductsCtrl', function ($location, $scope, AdminFactory, 
     $state.go('adminOnly.products')
   }
 
-<<<<<<< HEAD
-  $scope.getEditProduct = function(product) {
-    $scope.showForm = true;
-    $scope.editProductId = product._id
-    console.log('get edit product', product.title)
-
-    //populate the $scope.product
-    $scope.productModel = {
-      title: product.title,
-      description: product.description,
-      price: product.price,
-      quantity: product.quantity,
-      category: product.category,
-      img: null
-    }
-
-    $state.go('adminOnly.products.edit')
-  }
-
-  $scope.editProduct = function(product) {
-    //retrieve only the updated product info!
-    var id = $scope.editProductId
-
-    AdminFactory.editProduct(id, product);
-
-  }
-
-=======
->>>>>>> a8cc9186abae24a35691614cf9e016db874afbdc
   $scope.deleteProduct = function(product){
     console.log('deleteproduct', product)
 

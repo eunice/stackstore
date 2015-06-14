@@ -31,8 +31,10 @@ var schema = new mongoose.Schema({
     },
     userType: {
         type: String,
-        enum: ['USER', 'ADMIN', 'HERO']
+        enum: ['User', 'Admin', 'Hero']
     },
+    description: String,
+    photo: String,
     orders: [{type: mongoose.Schema.Types.ObjectId, ref: 'Order'}],
     reviews:[{type: mongoose.Schema.Types.ObjectId, ref: 'Review'}]
 });

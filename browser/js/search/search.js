@@ -8,7 +8,7 @@ app.config(function($stateProvider) {
 	});
 });
 
-app.controller('SearchController', function($scope, $stateParams, SearchFactory) {
+app.controller('SearchController', function ($scope, $stateParams, SearchFactory) {
 
     SearchFactory.search($stateParams.params).then(function(results) {
         console.log(results);

@@ -9,8 +9,8 @@ app.config(function ($stateProvider) {
 
 });
 
-app.controller('DiscoverController', function ($scope) {
-
+app.controller('DiscoverController', function ($scope, $interval) {
+    $scope.hero;
     $scope.categories = [
       { label: 'chefs'},
       { label: 'comedians'},
@@ -18,7 +18,17 @@ app.controller('DiscoverController', function ($scope) {
       { label: 'entrepreneurs'},
       { label: 'musicians'},
       { label: 'teachers'},
-      { label: 'writers'}
+      { label: 'writers'},
+      { label: 'actors'},
+      { label: 'athletes'}
     ];
+
+    $scope.getHero = function () {
+     $scope.hero = $scope.categories[Math.floor(Math.random()*$scope.categories.length)].label;
+    }
+
+    $scope.getHero();
+    $interval($scope.getHero, 3000);
+
 
 });

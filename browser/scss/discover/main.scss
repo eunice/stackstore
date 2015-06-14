@@ -2,8 +2,89 @@
 	text-transform: capitalize;
 	font-weight: bold;
 	font-size: 1.5em;
+	height: 220px;
+	text-align: center;
+	background-size: 110%;
+	&:hover {
+		color: $cyan;
+		cursor: pointer;
+		opacity: 1;
+		transition: opacity 0.3s;
+	}
+	line-height: 200px;
+	opacity: 0.8;
 }
 
 li {
 	list-style-type: none;
+}
+
+#discover-title {
+	text-align: center;
+	font-weight: bold;
+	padding: 20px 20px;
+	font-size: 3em;
+
+	span {
+		// font-variant: small-caps;
+		font-size: 1.1em;
+		text-transform: capitalize;
+		color: turquoise;
+		cursor: pointer;
+		&:hover {
+			color: darken(turquoise, 15%);
+		}
+	}
+}
+
+#discover-subtitle {
+	text-align: center;
+	font-size: 1.5em;
+	padding-bottom: 10px;
+}
+
+#wrapper {
+	margin: 10px;
+	width: 100%;
+	a {
+		color: $cyan;
+	}
+}
+
+
+
+
+#category-label {
+	color: white;
+}
+body {
+	background-color: $background;
+}
+
+.chefs {
+	background-image: url('http://images.watoday.com.au/2013/07/29/4610682/LH_heston4-20130729113014139499-620x0.jpg');
+}
+.comedians {
+	background-image: url('http://images.sodahead.com/polls/003950331/5754162812_tumblr_mrw4zzu8ZG1s9v5qzo1_400_answer_3_xlarge.jpeg');
+}
+.designers {
+	background-image: url('http://www.wendybendoni.com/wp-content/uploads/2013/03/31022_387876969145_29158774145_3759071_6959531_n.jpg');
+}
+.entrepreneurs {
+	background-image: url('https://studioblog.envato.com/wp-content/uploads/2015/04/Elon-Musk.jpg');
+}
+.musicians {
+	background-image: url('http://rebeccaniziol.com/wp-content/uploads/2013/03/concert-crowd.jpg');
+}
+.teachers {
+	background-image: url('http://archive.fortune.com/assets/i2.cdn.turner.com/money/2011/02/17/news/companies/worlds_best_business_professors_under_40.fortune/zeynep_ton.top.jpg');
+}
+.writers {
+	background-image: url('http://bengivenni.smugmug.com/photos/1177215738_HncHD-M.jpg');
+}
+.actors {
+	background-image: url('http://resources0.news.com.au/images/2013/11/26/1226768/737944-803dbab4-5638-11e3-beec-15972f93a644.jpg');
+}
+.athletes {
+	background-image: url('http://www.miamiopen.com/~/media/miami-open/images/news/serena-wins-again.ashx?h=1289&la=en&w=1919');
 }

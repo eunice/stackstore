@@ -10,27 +10,20 @@
         </ul>
 
         <form class="navbar-form navbar-left" role="search">
-          <div class="form-group glyphicon glyphicon-search">
             <input ng-model="searchQuery.data"type="text" class="form-control" placeholder="Search">
-          </div>
-          <button ng-click="search(searchQuery.data)" type="submit" class="btn btn-default">Submit</button>
+          <button ng-click="search(searchQuery.data)" id='search-btn' type="submit" class="btn btn-default"><i class="fa fa-search"></i></button>
         </form>
 
         <!-- Login Button + Show Login Page -->
-        <button ng-show="!user" ui-sref="login" class="btn login-button">Login</button>
+        <button ng-show="!user" ui-sref="login"  class="btn btn-default login-button">Login</button>
 
         <div ng-show="user" class="welcome">
-            <span>Welcome, {{ user.displayName }}!</span>
+            <span>Welcome, <a ng-click='profile(user._id)' href="#">{{ user.displayName.split(' ')[0] }}</a></span>
             <a ng-click="logout()">Logout</a>
         </div>
 
-        <!-- Admin panel -->
-        <div ng-show="user" class="welcome">
-            <span>Welcome, {{ user.displayName }}!</span>
-            <a ng-click="logout()">Logout</a>
-        </div>
 
         <!-- Shopping cart -->
-        <button ui-sref='cart' class="btn login-button glyphicon glyphicon-shopping-cart"></button>
+        <button ui-sref='cart' id='search-btn' class="btn btn-default login-button glyphicon glyphicon-shopping-cart"></button>
     </div>
 </nav>

@@ -10,8 +10,7 @@ app.directive('navbar', function ($rootScope, AuthService, AUTH_EVENTS, $state, 
             scope.items = [
                 { label: 'Home', state: 'home' },
                 { label: 'Discover', state: 'discover' },
-                { label: 'Become a hero', state: 'becomehero' },
-                { label: 'Members Only', state: 'membersOnly', auth: true }
+                { label: 'Become a hero', state: 'becomehero'}
             ];
 
             scope.user = null;
@@ -38,6 +37,10 @@ app.directive('navbar', function ($rootScope, AuthService, AUTH_EVENTS, $state, 
             scope.search = function (searchWord) {
                 $state.go('search', {params: searchWord});
             };
+
+            scope.profile = function (id) {
+                $state.go('Profile', {id: id})
+            }
 
             setUser();
 

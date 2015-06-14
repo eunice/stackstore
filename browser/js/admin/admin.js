@@ -8,21 +8,27 @@ app.config(function ($stateProvider) {
 
     //Product Control
     $stateProvider.state('adminOnly.products', {
-        url: '/products',
+        url: '/products/:id',
         templateUrl: 'js/admin/template/manageProducts.html',
-        controller: 'ManageProductsCtrl'
+        controller: 'ManageProductsCtrl',
+        // resolve: {
+        //   randomValue: function() {
+        //     var rand = Math.random();
+        //     console.log('resolve: ' + rand);
+        //     return rand;
+        // }
     });
 
     $stateProvider.state('adminOnly.products.create', {
-        url: '/products',
+        url: '/:id',
         templateUrl: 'js/admin/template/createProducts.html',
         controller: 'ManageProductsCtrl'
     });
 
     $stateProvider.state('adminOnly.products.edit', {
-        url: '/products',
+        url: '/:id',
         templateUrl: 'js/admin/template/editProducts.html',
-        controller: 'ManageProductsCtrl'
+        controller: 'EditCtrl'
     });
 
 

@@ -1,20 +1,32 @@
-app.controller('ManageProductsCtrl', function ($scope, AdminFactory, $state) {
-  // console.log('manage product controller')
+app.controller('ManageProductsCtrl', function ($location, $scope, AdminFactory, $state) {
+  // $scope.$state = $state;
+  // $scope.$watch('$state.$current.locals.globals.$stateParams.id', function () {
+  //   // $scope.r
+  // });
+
+  console.log('manage product controller', $location.path())
 
   AdminFactory.getProducts().then(function(products){
-    console.log('get all products')
-      $scope.products = products;
+    $scope.products = products;
+    console.log('get all products', $scope.products)
+    // console.log('hi',$state.$current.locals.globals.$stateParams.id)
   });
 
+  // $scope.reloadRoute = function() {
+  //   var rand = Math.floor(Math.random()*100);
+  //   console.log(rand)
+  //   // $state.go('adminOnly.products', {id: rand})// {}
+  // }
+ 
 
   $scope.categories = [
-    { label: 'chefs'},
-    { label: 'comedians'},
-    { label: 'designers'},
-    { label: 'entrepreneurs'},
-    { label: 'musicians'},
-    { label: 'teachers'},
-    { label: 'writers'}
+  { label: 'chefs'},
+  { label: 'comedians'},
+  { label: 'designers'},
+  { label: 'entrepreneurs'},
+  { label: 'musicians'},
+  { label: 'teachers'},
+  { label: 'writers'}
   ];
 
   $scope.productModel = {
@@ -58,37 +70,10 @@ app.controller('ManageProductsCtrl', function ($scope, AdminFactory, $state) {
     $state.go('adminOnly.products')
   }
 
-  $scope.getEditProduct = function(product) {
-    $scope.showForm = true;
-    $scope.editProductId = product._id
-    console.log('get edit product', product.title)
-
-    //populate the $scope.product
-    $scope.productModel = {
-      title: product.title,
-      description: product.description,
-      price: product.price,
-      quantity: product.quantity,
-      category: product.category,
-      img: null
-    }
-
-    $state.go('adminOnly.products.edit')
-  }
-
-  $scope.editProduct = function(product) {
-    //retrieve only the updated product info!
-    var id = $scope.editProductId
-
-    {category: comedian, price: 23423}
-    AdminFactory.editProduct(id, product);
-
-  }
-
   $scope.deleteProduct = function(product){
     console.log('deleteproduct', product)
 
-      AdminFactory.deleteProduct(product._id);
+    AdminFactory.deleteProduct(product._id);
   }
 
 

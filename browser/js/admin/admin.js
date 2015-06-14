@@ -8,7 +8,7 @@ app.config(function ($stateProvider) {
 
     //Product Control
     $stateProvider.state('adminOnly.products', {
-        url: '/products/:id',
+        url: '/products',
         templateUrl: 'js/admin/template/manageProducts.html',
         controller: 'ManageProductsCtrl',
         // resolve: {

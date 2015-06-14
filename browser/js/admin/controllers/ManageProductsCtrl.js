@@ -3,7 +3,6 @@ app.controller('ManageProductsCtrl', function ($location, $scope, AdminFactory, 
   // $scope.$watch('$state.$current.locals.globals.$stateParams.id', function () {
   //   // $scope.r
   // });
-
   console.log('manage product controller', $location.path())
 
   AdminFactory.getProducts().then(function(products){
@@ -29,14 +28,14 @@ app.controller('ManageProductsCtrl', function ($location, $scope, AdminFactory, 
   { label: 'writers'}
   ];
 
-  $scope.productModel = {
-    title: null,
-    description: null,
-    price: null,
-    quantity: null,
-    category: null,
-    img: null
-  }
+  // $scope.productModel = {
+  //   title: null,
+  //   description: null,
+  //   price: null,
+  //   quantity: null,
+  //   category: null,
+  //   img: null
+  // }
 
   $scope.selectCategory = null;
 

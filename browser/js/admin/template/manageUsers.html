@@ -1,11 +1,11 @@
+<div>
+
 <ui-view ng-show="showForm"></ui-view>
 
 <div ng-hide="showForm">
 <div>
 	<br>
-	<button type="button" class="btn btn-default btn-lg" ui-sref=".create" ng-click="showForm=true">
-	  <span class="glyphicon glyphicon-star" aria-hidden="true"></span> Create
-	</button>
+
 	<button type="button" class="btn btn-default btn-lg" ng-click="getAll()">
 	  <span class="glyphicon glyphicon-star" aria-hidden="true"></span> Show All Users
 	</button>
@@ -15,24 +15,37 @@
 	    Categories <span class="caret"></span>
 	  </button> -->
 
-		<select ng-model="selectCategory">
-			<option ng-repeat="category in categories" ng-selected="selectCategory">{{category.label}}</option>
+		<select ng-model="selectUserType">
+			<option ng-repeat="type in userTypes" ng-selected="selectUserType">{{type.label}}</option>
 		</select>
-		<button ng-click="getCategory(selectCategory)">Go</button>
+		<button ng-click="getUserTypes(selectUserType)">Go</button>
 </div>
-</div>
+
 
 <br>
 
 <table class="table table-striped"  >
-	<tr ng-repeat='user in users track by $index'>
+	<tr>
+    <td>Display Name</td>
+    <td>Type</td>
+    <td>Email</td>
+    <td>Facebook Id</td>
+    <td>Google Id</td>
+    <td></td>
+    <td></td>
+
+    <tr ng-repeat='user in users track by $index'>
 		<td>{{ user.displayName }}</td>
 		<td>{{ user.userType }}</td>
 		<td>{{ user.email }}</td>
 		<td>{{ user.facebook.id }}</td>
     <td>{{ user.google.id }}</td>
-		<td class="fa fa-pencil" ng-click="getEditProduct(product)" ui-sref=".edit"> Edit </td>
-		<td class="fa fa-trash-o" ng-click="deleteProduct(product)"> Delete</td>
+		<td class="fa fa-pencil" ng-click="editUser(user)"> Setting </td>
+		<td class="fa fa-trash-o" ng-click="deleteUser(user)"> Delete</td>
+    </tr>
+
 	</tr>
 </table>
+</div>
+
 </div>

@@ -42,8 +42,29 @@ app.controller('ManageProductsCtrl', function ($scope, AdminFactory, $state) {
 
   }
 
+  //Image upload... not working yet
+  // inject --> $file, $upload
+  // $scope.uploadImg = function($files) {
+  //   for(var i=0; i< $files.length; i++) {
+  //     var file = $files[i];
+  //     if (!file.type.match(/image.*/)) {
+  //       //if file is not an image
+  //     };
+  //     $scope.upload = $upload.upload({
+  //       url: /products/upload,
+  //       data: {myObj: $scope.myModelObj},
+  //       file: file
+  //     }).progress(function(evt){
+  //       console.log('percent: ' + parseInt(100.0 * evt.loaded / evt.total));
+  //     }).success(function(data, status, headers, config) {
+  //       console.log(data);
+  //     })
+  //   }
+  // }
+
   $scope.createProduct = function(product) {
     // console.log('createproduct controller', product)
+    $scope.showForm = true;
     AdminFactory.createProduct(product);
 
     $scope.productModel = {
@@ -80,7 +101,6 @@ app.controller('ManageProductsCtrl', function ($scope, AdminFactory, $state) {
     //retrieve only the updated product info!
     var id = $scope.editProductId
 
-    {category: comedian, price: 23423}
     AdminFactory.editProduct(id, product);
 
   }

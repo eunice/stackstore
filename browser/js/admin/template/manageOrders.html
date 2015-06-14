@@ -1,0 +1,52 @@
+<div>
+
+<ui-view ng-show="showForm"></ui-view>
+
+<div ng-hide="showForm">
+<div>
+	<br>
+
+	<button type="button" class="btn btn-default btn-lg" ng-click="getAll()">
+	  <span class="glyphicon glyphicon-star" aria-hidden="true"></span> Show All Orders
+	</button>
+
+	<!-- <div class="btn-group">
+	  <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-expanded="false">
+	    Categories <span class="caret"></span>
+	  </button> -->
+
+		<select ng-model="selectStatus">
+			<option ng-repeat="status in status" ng-selected="selectStatus">{{status.label}}</option>
+		</select>
+		<button ng-click="getStatus(selectStatus)">Go</button>
+</div>
+
+
+<br>
+
+<table class="table table-striped">
+	<tr>
+    <td>Order Id</td>
+    <td>User Id</td>
+    <td>Guest</td>
+    <td>Email</td>
+    <td>Status</td>
+    <td>Date Created</td>
+    <td></td>
+
+    <tr ng-repeat='order in orders track by $index'>
+		<td>{{ order._id }}</td>
+		<td>{{ order.userId }}</td>
+		<td>{{ order.guest }}</td>
+		<td>{{ order.email }}</td>
+    <td>{{ order.status }}</td>
+    <td>{{ order.dateCreated }}</td>
+    <td class="fa fa-eye" ng-click="viewOrder(order)"> View </td>
+		<td class="fa fa-pencil" ng-click="editOrder(order)"> Setting </td>
+    </tr>
+
+	</tr>
+</table>
+</div>
+
+</div>

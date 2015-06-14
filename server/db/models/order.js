@@ -5,11 +5,20 @@ var schema = new mongoose.Schema({
 		type: mongoose.Schema.Types.ObjectId,
 		ref: 'User'
 	},
-	userType: {
-		type: String,
+	guest: {
+		type: Boolean,
 		required: true
 	},
-	orderDetails: {
+	email: {
+		type: String
+	},
+	shippingAddress: {
+		type: String
+	},
+	creditCard: {
+		type: String
+	},
+	items: [{
 		price: {
 			type: Number,
 			required: true
@@ -18,19 +27,21 @@ var schema = new mongoose.Schema({
 			type: Number,
 			required: true
 		},
-		cartId: {
-			type: String,
-			required: true
+		productId: {
+			type: mongoose.Schema.Types.ObjectId,
+			ref: 'Product'
 		},
-	},
+		_id: false
+	}],
 	status: {
 		type: String,
+		enum: ['PENDING', 'PROCESSED', 'REJECTED', 'CANCELLED', 'FULFILLED'],
 		required: true
 	},
 	dateCreated: {
 		type: Date,
 		default: Date.now
 	}
-})
+});
 
 mongoose.model('Order', schema);

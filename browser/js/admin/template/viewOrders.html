@@ -1,0 +1,37 @@
+<div>
+
+  <div class="modal-header">
+    <h3>Order Details</h3>
+  </div>
+
+  <div class="modal-body">
+  <div id="update-status">
+  <ul>
+    <li>Order ID: {{order._id}}</li>
+    <li>User ID: {{order.userId}}</li>
+    <li>Guest: {{order.guest}}</li>
+    <li>Email: {{order.email}}</li>
+    <li>Shipping Address: {{order.shippingAddress}}</li>
+    <li>Credit Card: {{order.creditCard}}</li>
+    <li>Status: {{order.status}}</li>
+    <li>Date Created: {{order.dateCreated}}</li>
+  </ul>
+
+  <!-- Display all products - make changes here " -->
+  <div>
+    <p>Item(s) Purchased:</p>
+    <ul ng-repeat="item in order.items track by $index">
+      <li>Product ID: {{item.productId}}</li>
+      <li>Title: {{}}</li>
+      <li>Category: {{}}</li>
+      <li>Quantity: {{}}</li>
+      <li>Img: {{}}</li>
+    </ul>
+  </div>
+  </div>
+
+  <div class="modal-footer">
+    <button class="btn btn-primary" ng-click="close()">Close</button>
+  </div>
+
+</div>

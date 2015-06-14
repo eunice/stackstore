@@ -34,7 +34,11 @@
         <input type="text" name="category" ng-model="productModel.category" class="form-control" id="product-category" placeholder="Category">
     </div>
 
-    <div>Upload image here</div>
+    <div class="form-group">
+      <label for="quantity">Upload image</label>
+      <input type="file" accept="image/*" name="img" ng-file-select="uploadImg($files)" id="product-image">
+      <!-- <img ng-show="fileName" ng-src="server/{{fileName}}" width="40" style="margin-left: 10px"> -->
+    </div>
 
     <button type="submit" class="btn btn-default">Submit</button>
 </form>

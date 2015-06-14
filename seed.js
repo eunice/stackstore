@@ -23,6 +23,7 @@ var mongoose = require('mongoose');
 var connectToDb = require('./server/db');
 var User = mongoose.model('User');
 var Product = mongoose.model('Product');
+var Order = mongoose.model('Order');
 var q = require('q');
 var chalk = require('chalk');
 
@@ -32,6 +33,10 @@ var getCurrentUserData = function () {
 
 var getCurrentProductData = function () {
     return q.ninvoke(Product, 'find', {});
+};
+
+var getCurrentOrderData = function () {
+    return q.ninvoke(Order, 'find', {});
 };
 
 var seedUsers = function () {
@@ -52,6 +57,44 @@ var seedUsers = function () {
     return q.invoke(User, 'create', users);
 
 };
+
+var seedOrders = function () {
+
+    var orders = [
+    {
+        userId: "557c8f6635d025176f069cae",
+        guest: true,
+        email: "eunice@gmail.com",
+        shippingAddress: "Happy Valley",
+        creditCard: "1234567",
+        items: [{
+          price: 123,
+          quantity: 2,
+          productId: "557ce6cde0e8fb08e1de1fb5"
+        }],
+        status: "PROCESSED"
+    },
+
+    {
+        userId: "557c8f6635d025176f069cae",
+        guest: true,
+        email: "reico@gmail.com",
+        shippingAddress: "Happy Valley",
+        creditCard: "1234567",
+        items: [{
+          price: 123,
+          quantity: 2,
+          productId: "557ce6cde0e8fb08e1de1fb5"
+        }],
+        status: "REJECTED"
+    }
+
+    ];
+
+    return q.invoke(Order, 'create', orders);
+
+};
+
 
 var seedProducts = function () {
 
@@ -111,6 +154,7 @@ var seedProducts = function () {
 };
 
 connectToDb.then(function () {
+
     getCurrentUserData().then(function (users) {
         if (users.length === 0) {
             return seedUsers();
@@ -127,6 +171,15 @@ connectToDb.then(function () {
             console.log(chalk.magenta('Seems to already be product data, exiting!'));
             process.kill(0);
         }
+    }).then(function () {
+      return getCurrentOrderData()
+    }).then(function (orders) {
+      if (orders.length === 0) {
+        return seedOrders();
+      } else {
+          console.log(chalk.magenta('Seems to already be order data, exiting!'));
+          process.kill(0);
+      }
     }).then(function () {
         console.log(chalk.green('Seed successful!'));
         process.kill(0);

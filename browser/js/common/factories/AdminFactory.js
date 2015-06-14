@@ -1,7 +1,7 @@
 app.factory('AdminFactory', function ($http) {
 	return {
 
-		//Product
+		//Product-----------------------------------------------
 		getProducts: function(category) {
 			console.log('get product factory', category)
 
@@ -38,17 +38,65 @@ app.factory('AdminFactory', function ($http) {
 			})
 		},
 
-		//User
-		getUsers: function(category) {
-			console.log('get product factory', category)
+		//User--------------------------------------------------
+		getUsers: function(userType) {
+			console.log('get user factory', userType)
 
 			var queryParams= {};
 
-			if (category) {
-				queryParams.category = category;
+			if (userType) {
+				queryParams.userType = userType;
 			}
 
-			return $http.get('/api/admin/products', {params: queryParams})
+			return $http.get('/api/admin/users', {params: queryParams})
+			.then(function (response) {
+				return response.data;
+			})
+		},
+
+		deleteUser: function(id){
+			return $http.delete('api/admin/users/' + id)
+			.then(function(response) {
+				return response.data;
+			})
+		},
+
+		updateUserType: function(id, type) {
+			console.log('update user type', id + type)
+			return $http.put('api/admin/users/' + id, {params: type})
+			.then(function (response) {
+				return response.data;
+			})
+		},
+
+		//Orders------------------------------------------------------
+		getOrders: function(status) {
+			console.log('get order factory', status)
+
+			var queryParams= {};
+
+			if (status) {
+				queryParams.status = status;
+			}
+
+			return $http.get('/api/admin/orders', {params: queryParams})
+			.then(function (response) {
+				return response.data;
+			})
+		},
+
+		getOrderById: function(id) {
+			console.log('get order by id factory', id)
+
+			return $http.get('/api/admin/orders/' + id)
+			.then(function(response) {
+				return response.data;
+			})
+		},
+
+		updateOrderStatus: function(id, status) {
+			console.log('update order status', id+ status)
+			return $http.put('api/admin/orders/' + id, {params: status})
 			.then(function (response) {
 				return response.data;
 			})

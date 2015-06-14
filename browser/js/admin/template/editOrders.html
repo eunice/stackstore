@@ -1,0 +1,22 @@
+<div>
+
+  <div class="modal-header">
+    <h3>Edit Order Setting</h3>
+  </div>
+
+  <div class="modal-body">
+  <div id="update-status">
+  <span>Update Order Status</span>
+  <select ng-model='newOrderStatus'>
+    <option ng-repeat="status in status track by $index" ng-selected="newOrderStatus">{{ status.label }}</option>
+    <!-- <option>Admin</option>
+    <option>Hero</option> -->
+  </select>
+  <button ng-click="updateOrderStatus(newOrderStatus)">Update</button>
+  <div>
+
+  <div class="modal-footer">
+    <button class="btn btn-primary" ng-click="close()">Close</button>
+  </div>
+
+</div>

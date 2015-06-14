@@ -1,9 +1,12 @@
-navbar {
-
+.navbar {
+  margin-bottom: 0px !important;
+  border-bottom: solid 1px #d9d9de;
+  // border-left: solid 1px #d9d9de;
+  // padding-top: 20.3px;
   display: block;
   background: white;
   fullstack-logo {
-    padding-top: 10px;
+    padding-top: 5px;
     margin-right: 20px;
     width: 30px;
   }
@@ -37,7 +40,8 @@ navbar {
 
   .welcome {
     float: right;
-    margin-top: 12px;
+    margin-top: 15px;
+    padding-left: 0px;
     span {
       color: black;
       padding-right: 10px;
@@ -52,6 +56,9 @@ navbar {
 }
 
 #search-btn {
+  padding-top: 5px;
+    margin-right: 20px;
+    width: 30px;
   border: none;
   font-size: 1.2em;
   &:hover {

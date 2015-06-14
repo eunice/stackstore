@@ -3,8 +3,6 @@ app.factory('AdminFactory', function ($http) {
 
 		//Product-----------------------------------------------
 		getProducts: function(category) {
-			console.log('get product factory', category)
-
 			var queryParams= {};
 
 			if (category) {

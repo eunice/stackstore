@@ -1,20 +1,32 @@
-app.controller('ManageProductsCtrl', function ($scope, AdminFactory, $state) {
-  // console.log('manage product controller')
+app.controller('ManageProductsCtrl', function ($location, $scope, AdminFactory, $state) {
+  // $scope.$state = $state;
+  // $scope.$watch('$state.$current.locals.globals.$stateParams.id', function () {
+  //   // $scope.r
+  // });
+
+  console.log('manage product controller', $location.path())
 
   AdminFactory.getProducts().then(function(products){
-    console.log('get all products')
-      $scope.products = products;
+    $scope.products = products;
+    console.log('get all products', $scope.products)
+    // console.log('hi',$state.$current.locals.globals.$stateParams.id)
   });
 
+  // $scope.reloadRoute = function() {
+  //   var rand = Math.floor(Math.random()*100);
+  //   console.log(rand)
+  //   // $state.go('adminOnly.products', {id: rand})// {}
+  // }
+ 
 
   $scope.categories = [
-    { label: 'chefs'},
-    { label: 'comedians'},
-    { label: 'designers'},
-    { label: 'entrepreneurs'},
-    { label: 'musicians'},
-    { label: 'teachers'},
-    { label: 'writers'}
+  { label: 'chefs'},
+  { label: 'comedians'},
+  { label: 'designers'},
+  { label: 'entrepreneurs'},
+  { label: 'musicians'},
+  { label: 'teachers'},
+  { label: 'writers'}
   ];
 
   $scope.productModel = {
@@ -79,6 +91,7 @@ app.controller('ManageProductsCtrl', function ($scope, AdminFactory, $state) {
     $state.go('adminOnly.products')
   }
 
+<<<<<<< HEAD
   $scope.getEditProduct = function(product) {
     $scope.showForm = true;
     $scope.editProductId = product._id
@@ -105,10 +118,12 @@ app.controller('ManageProductsCtrl', function ($scope, AdminFactory, $state) {
 
   }
 
+=======
+>>>>>>> a8cc9186abae24a35691614cf9e016db874afbdc
   $scope.deleteProduct = function(product){
     console.log('deleteproduct', product)
 
-      AdminFactory.deleteProduct(product._id);
+    AdminFactory.deleteProduct(product._id);
   }
 
 

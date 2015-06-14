@@ -16,7 +16,7 @@
 
     <div>
         <label for="description">Description</label>
-        <li contentEditable="true" ng-model="productModel.description" id="product-description">{{productModel.desctiption}}</li>
+        <li contentEditable="true" ng-model="productModel.description" id="product-description">{{productModel.description}}</li>
     </div>
 
     <div>
@@ -30,11 +30,20 @@
     </div>
 
     <div>
+      <label>Categories</label><br>
+      <select ng-model="categories">
+        <option ng-repeat="category in categories">{{category.label}}</option>
+      </select>
+    </div>
+    <div>
         <label for="category">Category</label>
         <li contentEditable="true" ng-model="productModel.category" id="product-category">{{productModel.category}}</li>
     </div>
 
-    <div>Upload image here</div>
+    <div>
+      <label> Image </label>
+      <li>{{productModel.img}}
+    </div>
 
-    <button type="submit" class="btn btn-default">Submit</button>
+    <button type="submit" class="btn btn-default" ng-click="editProduct(productModel)">Submit</button>
 <!-- </form> -->

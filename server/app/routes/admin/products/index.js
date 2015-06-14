@@ -25,6 +25,14 @@ router.get('/', function(req, res, next){
 		}, next);
 });
 
+router.post('/', function (req, res, next) {
+	// console.log('hit create product route', req.body)
+    mongoose.model('Product').create(req.body)
+		.then(function(productinfo) {
+          res.send(productinfo);
+      }, next);
+});
+
 router.delete('/:id', function (req, res, next) {
 	var id = req.params.id;
 	console.log('delete',id)
@@ -34,14 +42,6 @@ router.delete('/:id', function (req, res, next) {
 		res.send(product)
 	}, next)
 
-});
-
-router.post('/', function (req, res, next) {
-	// console.log('hit create product route', req.body)
-    mongoose.model('Product').create(req.body)
-		.then(function(productinfo) {
-          res.send(productinfo);
-      }, next);
 });
 
 router.put('/:id', function(req, res, next) {

@@ -1,6 +1,7 @@
 app.controller('ReviewController', function($scope, $modalInstance, $state, id, Review) {
-	console.log(id)
 	$scope.error = null;
+	$scope.boughtError = false;
+	$scope.submitted = false;
 
 	$scope.cancel = function() {
 		$modalInstance.dismiss('cancel');
@@ -14,7 +15,12 @@ app.controller('ReviewController', function($scope, $modalInstance, $state, id, 
 		review.productId = id;
 		Review.addReview(review)
 		.then(function(res){
-			console.log(res)
+			if (res.status === 401) $scope.boughtError = true;
+			else {
+				$scope.boughtError = false;
+				$scope.submitted = true;
+				// $modalInstance.close();
+			};
 		})
 	};
 

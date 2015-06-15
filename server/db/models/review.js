@@ -23,7 +23,7 @@ var schema = new mongoose.Schema({
 });
 
 function reviewValidator(review) {
-	return review.length > 0 && review.length < 2000;
+	return review ? review.length > 0 && review.length < 2000 : false;
 }
 
 schema.pre('save', function(next) {
@@ -31,19 +31,22 @@ schema.pre('save', function(next) {
 	mongoose.model('User').findById(self.userId)
 		.populate('orders')
 		.exec()
-		.then(function (user) {
+		.then(function(user) {
 			var items = [];
-			user.orders.forEach(function(order){
-				order.items.forEach(function (item) {
+			user.orders.forEach(function(order) {
+				order.items.forEach(function(item) {
 					items.push(item.productId);
 				})
 			})
-				if (!~JSON.stringify(items).search(self.productId))
-					throw new Error('You cannot review an item you haven\'t bought!');
-				else {
-					return true
-				}
-		}).then(function(user){next();}, next);
+			if (!~JSON.stringify(items).search(self.productId))
+				throw new Error('You cannot review an item you haven\'t bought!');
+			else {
+				return true
+			}
+		})
+		.then(function() {
+			next();
+		}, next);
 });
 
 mongoose.model('Review', schema);

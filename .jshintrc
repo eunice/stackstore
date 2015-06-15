@@ -15,6 +15,7 @@
   "browser": true,
   "laxbreak": true,
   "mocha": true,
+  "asi": true,
   "globals" : {
     "angular" : true,
     "app": true,

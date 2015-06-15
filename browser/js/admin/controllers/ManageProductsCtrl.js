@@ -64,7 +64,7 @@ app.controller('ManageProductsCtrl', function ($location, $scope, AdminFactory, 
 
 });
 
-app.controller('createProductModalCtrl', function($scope, AdminFactory, $modalInstance, $state) {
+app.controller('createProductModalCtrl', function($scope, AdminFactory, $modalInstance, $state, $modal) {
 
   console.log('createProductModalCtrl')
 
@@ -172,11 +172,11 @@ app.controller('editProductCtrl', function($scope, AdminFactory, $modalInstance,
   ];
   // $scope.selectCategory = $scope.categories.indexOf(product.category)
   $scope.findCategory = function(category){
-    $scope.categories.forEach(a){
-      if(a.label = product.category){
-        return $scope.categories.indexOf(a);
+    $scope.categories.forEach(function(category){
+      if (category.label = product.category){
+        return $scope.categories.indexOf(category);
       }
-    }
+    })
   }
 
   $scope.editProductDetail = function(productUpdate) {

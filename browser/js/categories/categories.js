@@ -21,11 +21,11 @@ app.controller('CategoryController', function ($scope, $stateParams, GetProducts
 			return LocalStorage.addItemToCart(item);
 		} else {
 			return Storage.addItemToCart(item);
-
 		}
 	};
 
 	$scope.open = function (id) {
+		console.log('opening')
 		var modalInstance = $modal.open({
 			animation: $scope.animationsEnabled,
 			templateUrl: 'js/categories/modal/modal.html',

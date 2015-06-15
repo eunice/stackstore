@@ -27,7 +27,7 @@ app.controller('ManageOrdersCtrl', function ($scope, AdminFactory, $state, $moda
   }
 
   $scope.editOrder = function (order) {
-    $scope.showForm = true;
+    // $scope.showForm = true;
     console.log('edit order...',order)
     var id = order._id;
 
@@ -43,7 +43,7 @@ app.controller('ManageOrdersCtrl', function ($scope, AdminFactory, $state, $moda
   }
 
   $scope.viewOrder = function (order) {
-    $scope.showForm = true;
+    // $scope.showForm = true;
     console.log('view order...',order)
     var id = order._id;
 

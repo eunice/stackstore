@@ -1,9 +1,9 @@
-<ui-view ng-show="showForm"></ui-view>
+<!-- <ui-view ng-show="showForm"></ui-view> -->
 
-<div ng-hide="showForm">
+<div>
 	<div>
 		<br>
-		<button type="button" class="btn btn-default btn-lg" ui-sref=".create" ng-click="showForm=true">
+		<button type="button" class="btn btn-default btn-lg" ng-click="createProduct()">
 		  <span class="glyphicon glyphicon-star" aria-hidden="true"></span> Create
 		</button>
 		<button type="button" class="btn btn-default btn-lg" ng-click="getAll()">

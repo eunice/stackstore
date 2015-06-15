@@ -1,4 +1,4 @@
-app.controller('ManageProductsCtrl', function ($location, $scope, AdminFactory, $state) {
+app.controller('ManageProductsCtrl', function ($location, $scope, AdminFactory, $state, $modal) {
   // $scope.$state = $state;
   // $scope.$watch('$state.$current.locals.globals.$stateParams.id', function () {
   //   // $scope.r
@@ -16,17 +16,19 @@ app.controller('ManageProductsCtrl', function ($location, $scope, AdminFactory, 
   //   console.log(rand)
   //   // $state.go('adminOnly.products', {id: rand})// {}
   // }
- 
+
 
   $scope.categories = [
-  { label: 'chefs'},
-  { label: 'comedians'},
-  { label: 'designers'},
-  { label: 'entrepreneurs'},
-  { label: 'musicians'},
-  { label: 'teachers'},
-  { label: 'writers'}
-  ];
+    {label: 'comedians'},
+    {label: 'chefs'},
+    {label: 'writers'},
+    {label: 'teachers'},
+    {label: 'musicians'},
+    {label: 'entrepreneurs'},
+    {label: 'designers'},
+    {label: 'actors'},
+    {label: 'athletes'},
+  ]
 
   // $scope.productModel = {
   //   title: null,
@@ -53,6 +55,52 @@ app.controller('ManageProductsCtrl', function ($location, $scope, AdminFactory, 
 
   }
 
+  $scope.createProduct = function() {
+    console.log('createproduct controller')
+
+    var modalInstance = $modal.open({
+      templateUrl: 'js/admin/template/createProducts.html',
+      controller: 'createProductModalCtrl'
+    });
+
+  }
+
+  $scope.deleteProduct = function(product){
+    console.log('deleteproduct', product)
+
+    AdminFactory.deleteProduct(product._id);
+  }
+
+});
+
+app.controller('createProductModalCtrl', function($scope, AdminFactory, $modalInstance, $state) {
+
+  console.log('createProductModalCtrl')
+
+  $scope.created = false;
+
+
+  $scope.categories = [
+    {label: 'comedians'},
+    {label: 'chefs'},
+    {label: 'writers'},
+    {label: 'teachers'},
+    {label: 'musicians'},
+    {label: 'entrepreneurs'},
+    {label: 'designers'},
+    {label: 'actors'},
+    {label: 'athletes'}
+  ]
+
+  $scope.productModel = {
+    title: null,
+    description: null,
+    price: null,
+    quantity: null,
+    category: null,
+    img: null
+  }
+
   //Image upload... not working yet
   // inject --> $file, $upload
   // $scope.uploadImg = function($files) {
@@ -72,10 +120,7 @@ app.controller('ManageProductsCtrl', function ($location, $scope, AdminFactory, 
   //     })
   //   }
   // }
-
-  $scope.createProduct = function(product) {
-    // console.log('createproduct controller', product)
-    $scope.showForm = true;
+  $scope.createProduct = function (product) {
     AdminFactory.createProduct(product);
 
     $scope.productModel = {
@@ -87,16 +132,17 @@ app.controller('ManageProductsCtrl', function ($location, $scope, AdminFactory, 
       img: null
     }
 
+    $scope.created = true;
+
+    //double check if this works later
+    setTimeout(function(){
+      close()
+    }, 3000)
+  }
+
+  $scope.close = function () {
+    $modalInstance.close();
     $state.go('adminOnly.products')
   }
 
-  $scope.deleteProduct = function(product){
-    console.log('deleteproduct', product)
-
-    AdminFactory.deleteProduct(product._id);
-  }
-
-
-
-
-});
+})

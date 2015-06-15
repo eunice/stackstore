@@ -1,5 +1,4 @@
 .category-header {
-	text-transform: capitalize;
 	font-weight: bold;
 	font-size: 1.5em;
 	height: 220px;
@@ -13,6 +12,7 @@
 	}
 	line-height: 200px;
 	opacity: 0.8;
+	position: relative;
 }
 
 li {
@@ -63,6 +63,11 @@ body {
 
 .chefs {
 	background-image: url('http://images.watoday.com.au/2013/07/29/4610682/LH_heston4-20130729113014139499-620x0.jpg');
+	&:hover {
+		.category-header {
+			-webkit-filter: blur(3px);
+		}
+	}
 }
 .comedians {
 	background-image: url('http://images.sodahead.com/polls/003950331/5754162812_tumblr_mrw4zzu8ZG1s9v5qzo1_400_answer_3_xlarge.jpeg');

@@ -1,14 +1,14 @@
 app.config(function ($stateProvider) {
 
-    $stateProvider.state('categories', {
-        url: '/category/:category',
-        controller: 'CategoryController',
-        templateUrl: 'js/categories/categories.html'
-    });
+	$stateProvider.state('categories', {
+		url: '/category/:category',
+		controller: 'CategoryController',
+		templateUrl: 'js/categories/categories.html'
+	});
 
 });
 
-app.controller('CategoryController', function ($scope, $stateParams, GetProductsForCategory, LocalStorage, AuthService, Storage) {
+app.controller('CategoryController', function ($scope, $stateParams, GetProductsForCategory, LocalStorage, AuthService, Storage, $modal) {
 	$scope.products = null;
 	GetProductsForCategory.getProducts({'category':$stateParams.category})
 
@@ -23,6 +23,20 @@ app.controller('CategoryController', function ($scope, $stateParams, GetProducts
 			return Storage.addItemToCart(item);
 
 		}
+	};
+
+	$scope.open = function (id) {
+		var modalInstance = $modal.open({
+			animation: $scope.animationsEnabled,
+			templateUrl: 'js/categories/modal/modal.html',
+			controller: 'ReviewController',
+			size: 'lg',
+			resolve: {
+				id: function () {
+					return id
+				}
+			}
+		});
 	};
 
 });

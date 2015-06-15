@@ -31,7 +31,7 @@ app.controller('ManageUsersCtrl', function ($scope, AdminFactory, $state, $modal
   }
 
   $scope.editUser = function (user) {
-    $scope.showForm = true;
+    // $scope.showForm = true;
     console.log('edit user...',user)
     var id = user._id;
 

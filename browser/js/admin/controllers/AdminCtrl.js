@@ -1,10 +1,15 @@
-app.controller('AdminCtrl', function ($scope, AdminFactory, $state, Session) {
+app.controller('AdminCtrl', function ($scope, AuthService, AdminFactory, $state, Session) {
 
   // write the admin authen func
-  var isAdmin = function () {
-      console.log(Session.user)
-      return true;
-    }
+  (function isAdmin () {
+
+    AuthService.getLoggedInUser().then(function (user) {
+        $scope.user = user;
+        console.log($scope.user.userType)
+        if ($scope.user.userType === "Admin") $scope.isAdmin=true
+    });
+
+  })()
 
 
     // $scope.signin = {userType: "User"};

@@ -1,0 +1,43 @@
+<div>
+<div ng-show="isThatUser">
+	<br>
+
+	<button type="button" class="btn btn-default btn-lg" ng-click="getAll()">
+	  <span class="glyphicon glyphicon-star" aria-hidden="true"></span> Show All Orders
+	</button>
+
+	<!-- <div class="btn-group">
+	  <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-expanded="false">
+	    Categories <span class="caret"></span>
+	  </button> -->
+
+		<select ng-model="selectStatus">
+			<option ng-repeat="status in status" ng-selected="selectStatus">{{status.label}}</option>
+		</select>
+		<button ng-click="getStatus(selectStatus)">Go</button>
+</div>
+
+
+<br>
+
+<table class="table table-striped">
+	<tr>
+    <td>Order Id</td>
+    <td>Status</td>
+    <td>Number of items purchased</td>
+    <td>Date Created</td>
+    <td></td>
+
+    <tr ng-repeat='order in orders track by $index'>
+		<td>{{ order._id }}</td>
+    <td>{{ order.status }}</td>
+    <td>{{ order.items.length }}</td>
+    <!-- <td>{{ order.items }}</td> -->
+    <!-- <td>{{ (subtotal(order.items))() }}</td> -->
+    <td>{{ order.dateCreated }}</td>
+    <td class="fa fa-eye" ng-click="viewOrder(order)"> View </td>
+    </tr>
+
+	</tr>
+</table>
+</div>

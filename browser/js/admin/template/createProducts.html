@@ -1,3 +1,5 @@
+
+<div ng-if="!created">
 <form id="product-form" name="productForm" ng-submit="productForm.$valid && createProduct(productModel)">
 
   <!-- Alert  -->
@@ -31,14 +33,31 @@
 
     <div class="form-group">
         <label for="category">Category</label>
-        <input type="text" name="category" ng-model="productModel.category" class="form-control" id="product-category" placeholder="Category">
+        <select ng-model='productModel.category'>
+          <option ng-repeat="category in categories track by $index" ng-selected="productModel.category">{{ category.label }}</option>
+        </select>
+        <!-- <input type="text" name="category" ng-model="productModel.category" class="form-control" id="product-category" placeholder="Category"> -->
     </div>
 
     <div class="form-group">
-      <label for="quantity">Upload image</label>
-      <input type="file" accept="image/*" name="img" ng-file-select="uploadImg($files)" id="product-image">
+      <label for="quantity">Image Url</label>
+      <input type="text" name="img" ng-model="productModel.img" class="form-control" id="product-img" placeholder="Image Url">
+      <!-- <input type="file" accept="image/*" name="img" ng-file-select="uploadImg($files)" id="product-image"> -->
       <!-- <img ng-show="fileName" ng-src="server/{{fileName}}" width="40" style="margin-left: 10px"> -->
+      <img ng-show='productModel.img' src='{{productModel.img}}' height="50" width="50">
     </div>
 
     <button type="submit" class="btn btn-default">Submit</button>
 </form>
+
+<div class="modal-footer">
+  <button class="btn btn-primary" ng-click="close()">Close</button>
+</div>
+</div>
+
+<div ng-if="created">
+  <p>Product has been successfully created!</p>
+  <div class="modal-footer">
+    <button class="btn btn-primary" ng-click="close()">Close</button>
+  </div>
+</div>

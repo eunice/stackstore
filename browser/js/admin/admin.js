@@ -11,20 +11,7 @@ app.config(function ($stateProvider) {
         url: '/products',
         templateUrl: 'js/admin/template/manageProducts.html',
         controller: 'ManageProductsCtrl',
-        // resolve: {
-        //   randomValue: function() {
-        //     var rand = Math.random();
-        //     console.log('resolve: ' + rand);
-        //     return rand;
-        // }
     });
-
-    $stateProvider.state('adminOnly.products.edit', {
-        url: '/:id',
-        templateUrl: 'js/admin/template/editProducts.html',
-        controller: 'EditCtrl'
-    });
-
 
     $stateProvider.state('adminOnly.orders', {
         url: '/orders',

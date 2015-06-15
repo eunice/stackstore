@@ -30,7 +30,7 @@ app.factory('AdminFactory', function ($http) {
 		},
 
 		editProduct: function(id, updateInfo){
-			return $http.put('api/admin/products' + id, updateInfo)
+			return $http.put('api/admin/products/' + id, updateInfo)
 			.then(function (response) {
 				return response.data;
 			})

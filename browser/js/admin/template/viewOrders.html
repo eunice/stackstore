@@ -21,11 +21,11 @@
   <div>
     <p>Item(s) Purchased:</p>
     <ul ng-repeat="item in order.items track by $index">
-      <li>Product ID: {{item.productId}}</li>
-      <li>Title: {{}}</li>
-      <li>Category: {{}}</li>
-      <li>Quantity: {{}}</li>
-      <li>Img: {{}}</li>
+      <li>Product ID: {{item.productId._id}}</li>
+      <li>Title: {{item.productId.title}}</li>
+      <li>Category: {{item.productId.category}}</li>
+      <li>Quantity: {{item.productId.quantity}}</li>
+      <img src="{{item.productId.img}}" height="50" width="50">
     </ul>
   </div>
   </div>

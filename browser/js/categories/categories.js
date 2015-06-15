@@ -8,7 +8,7 @@ app.config(function ($stateProvider) {
 
 });
 
-app.controller('CategoryController', function ($scope, $stateParams, GetProductsForCategory, LocalStorage) {
+app.controller('CategoryController', function ($scope, $stateParams, GetProductsForCategory, LocalStorage, AuthService, Storage) {
 	$scope.products = null;
 	GetProductsForCategory.getProducts({'category':$stateParams.category})
 
@@ -17,7 +17,12 @@ app.controller('CategoryController', function ($scope, $stateParams, GetProducts
 		$scope.products = products;
 	});
 	$scope.addItem = function (item) {
-		return LocalStorage.addItemToCart(item);
+		if (!AuthService.isAuthenticated()) {
+			return LocalStorage.addItemToCart(item);
+		} else {
+			return Storage.addItemToCart(item);
+
+		}
 	};
 
 });

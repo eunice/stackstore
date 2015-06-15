@@ -8,35 +8,59 @@ app.config(function ($stateProvider) {
 
 });
 
-app.controller('CartController', function ($scope, $stateParams, GetProductsForCategory, LocalStorage, AuthService, $state, $modal) {
-	$scope.productIds = LocalStorage.getCart();
-	$scope.idArray = Object.keys($scope.productIds);
+app.controller('CartController', function ($scope, $stateParams, GetProductsForCategory, LocalStorage, Storage, AuthService, $state, $modal) {
+	$scope.productIds = null;
 	$scope.products = null;
 	$scope.cart = null;
 	$scope.ordered = false;
 	$scope.total = 0;
 
+	$scope.getProductIds = function () {
+		//refreshing page doesn't work atm
+		console.log(AuthService.isAuthenticated());
+		if (AuthService.isAuthenticated()) {
+			return Storage.getCart()
+			.then(function(itemIds){
+				console.log('hi',itemIds)
+				$scope.productIds = itemIds;
+				$scope.idArray = Object.keys($scope.productIds);
+				getItems();
+			})
+		} else {
+			$scope.productIds = LocalStorage.getCart();
+			$scope.idArray = Object.keys($scope.productIds);
+			getItems();
+		}
+	}
+
+	$scope.getProductIds();
+
 	$scope.removeItem = function (itemId) {
-		LocalStorage.removeItemFromCart(itemId);
+		if (AuthService.isAuthenticated())
+			return Storage.removeItemFromCart(itemId);
+		else
+			return LocalStorage.removeItemFromCart(itemId);
 	};
 	
-	GetProductsForCategory.getById($scope.idArray)
-	.then(function (products) {
-		$scope.products = products;
-	});
+	function getItems () {
+		return GetProductsForCategory.getById($scope.idArray)
+		.then(function (products) {
+			$scope.products = products;
+		});
+	}
 
 	$scope.checkout = function () {
 		AuthService.getLoggedInUser()
 		.then(function (user){
 			if (!user) return $scope.open();
 
-			else LocalStorage.checkoutCart()
-			.then (function (cart) {
-				console.log(cart);
-				$scope.cart = cart;
-				$scope.ordered = true;
-				sumPrice();
-			})
+			else Storage.checkoutCart()
+				.then (function (cart) {
+					console.log(cart);
+					$scope.cart = cart;
+					$scope.ordered = true;
+					sumPrice();
+				})
 		})
 		
 	};

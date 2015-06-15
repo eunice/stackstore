@@ -2,8 +2,8 @@
 var mongoose = require('mongoose');
 var _ = require('lodash');
 var router = require('express').Router();
+var q = require('q');
 module.exports = router;
-
 // .then(function (user) {
 // 	return user.orders.items.populate(orders, 'productId');
 // })
@@ -50,33 +50,34 @@ router.post('/', function(req, res, next) {
 router.post('/review', function(req, res, next) {
 	req.body.userId = req.user._id.toString();
 	console.log(req.body)
+	var createdReview;
 	mongoose.model('Review')
 	.create(req.body)
 	.then(function (review) {
-		mongoose.model('User')
+		createdReview = review;
+		return mongoose.model('User')
 		.findById(req.user._id)
 		.exec()
 		.then(function(user){
 			user.reviews.push(review._id);
-			console.log('here')
-			return user.save(function(err, user) {
-				console.log(user);
-			})
+			return q.ninvoke(user, 'save');
 		})
 		.then(function (user) {
-			mongoose.model('Product')
+			return mongoose.model('Product')
 			.findById(req.body.productId)
 			.exec()
 			.then(function (product) {
-				console.log('here2')
 				product.reviews.push(review._id);
-				product.save(function (err, product) {
-					console.log(product);
-					res.status(200).send(review);
-				})
+				return q.ninvoke(product,'save');
 			})
 		})
 	})
+	.then(function(){
+		res.json(createdReview);
+	})
+	.then(null,function(err){
+		res.status(401).send(err.message);
+	});
 })
 
 router.delete('/:id', function(req, res, next) {

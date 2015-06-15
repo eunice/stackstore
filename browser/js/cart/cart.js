@@ -24,6 +24,7 @@ app.controller('CartController', function ($scope, $stateParams, GetProductsForC
 				console.log('hi',itemIds)
 				$scope.productIds = itemIds;
 				$scope.idArray = Object.keys($scope.productIds);
+				console.log('auth id array',$scope.idArray)
 				getItems();
 			})
 		} else {
@@ -56,7 +57,7 @@ app.controller('CartController', function ($scope, $stateParams, GetProductsForC
 
 			else Storage.checkoutCart()
 				.then (function (cart) {
-					console.log(cart);
+					console.log('hello',cart);
 					$scope.cart = cart;
 					$scope.ordered = true;
 					sumPrice();

@@ -1,5 +1,5 @@
 var mongoose = require('mongoose');
-
+var q = require('q');
 var schema = new mongoose.Schema({
 	userId: {
 		type: mongoose.Schema.Types.ObjectId,
@@ -23,26 +23,30 @@ var schema = new mongoose.Schema({
 });
 
 function reviewValidator(review) {
-	return review.length > 0 && review.length < 2000;
+	return review ? review.length > 0 && review.length < 2000 : false;
 }
 
-schema.pre('save', function(next, done) {
+schema.pre('save', function(next) {
 	var self = this;
 	mongoose.model('User').findById(self.userId)
 		.populate('orders')
 		.exec()
-		.then(function (user) {
-			var items = user.orders[0].items
-				if (!JSON.stringify(items).match(self.productId))
-					next(new Error('You cannot review an item you haven\'t bought!'));
-				else {
-					user.reviews.push(self._id);
-					user.save(function(err, user){
-						next();
-						done();
-					})
-				}
-			});
+		.then(function(user) {
+			var items = [];
+			user.orders.forEach(function(order) {
+				order.items.forEach(function(item) {
+					items.push(item.productId);
+				})
+			})
+			if (!~JSON.stringify(items).search(self.productId))
+				throw new Error('You cannot review an item you haven\'t bought!');
+			else {
+				return true
+			}
+		})
+		.then(function() {
+			next();
+		}, next);
 });
 
 mongoose.model('Review', schema);

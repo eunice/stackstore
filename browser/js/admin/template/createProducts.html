@@ -1,0 +1,44 @@
+<form id="product-form" name="productForm" ng-submit="productForm.$valid && createProduct(productModel)">
+
+  <!-- Alert  -->
+  <!-- <alert type="danger" ng-show="productForm.pwField.$error.minlength">
+      Password needs to have at least 6 characters.
+  </alert>
+
+  <alert type="danger" ng-show="passwordMatch">
+      Password confirmation must match.
+  </alert> -->
+
+    <div class="form-group">
+        <label for="title">Title</label>
+        <input type="text" name="title" ng-model="productModel.title" class="form-control" id="product-title" placeholder="Title">
+    </div>
+
+    <div class="form-group">
+        <label for="description">Description</label>
+        <input type="text" name="description" ng-model="productModel.description" class="form-control" id="product-description" placeholder="Description">
+    </div>
+
+    <div class="form-group">
+        <label for="price">Price</label>
+        <input type="number" name="price" ng-model="productModel.price" class="form-control" id="product-price" placeholder="Price">
+    </div>
+
+    <div class="form-group">
+        <label for="quantity">Quantity</label>
+        <input type="number" name="quantity" ng-model="productModel.quantity" class="form-control" id="product-quantity" placeholder="Quantity">
+    </div>
+
+    <div class="form-group">
+        <label for="category">Category</label>
+        <input type="text" name="category" ng-model="productModel.category" class="form-control" id="product-category" placeholder="Category">
+    </div>
+
+    <div class="form-group">
+      <label for="quantity">Upload image</label>
+      <input type="file" accept="image/*" name="img" ng-file-select="uploadImg($files)" id="product-image">
+      <!-- <img ng-show="fileName" ng-src="server/{{fileName}}" width="40" style="margin-left: 10px"> -->
+    </div>
+
+    <button type="submit" class="btn btn-default">Submit</button>
+</form>

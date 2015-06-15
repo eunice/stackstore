@@ -4,7 +4,7 @@
             <fullstack-logo></fullstack-logo>
         </div>
         <ul class="nav navbar-nav">
-            <li ng-repeat="item in items" ng-show="!item.auth || isLoggedIn()">
+            <li ng-repeat="item in items" ng-show="(!item.adminauth || user.userType === 'Admin') && (!item.auth || isLoggedIn())">
                 <a ui-sref-active="active" ui-sref="{{ item.state }}">{{ item.label }}</a>
             </li>
         </ul>
@@ -21,7 +21,6 @@
             <span>Welcome, <a ng-click='profile(user._id)' href="#">{{ user.displayName.split(' ')[0] }}</a></span>
             <a ng-click="logout()">Logout</a>
         </div>
-
 
         <!-- Shopping cart -->
         <button ui-sref='cart' id='search-btn' class="btn btn-default login-button glyphicon glyphicon-shopping-cart"></button>

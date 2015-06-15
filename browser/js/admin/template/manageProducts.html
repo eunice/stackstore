@@ -1,0 +1,37 @@
+<ui-view ng-show="showForm"></ui-view>
+
+<div ng-hide="showForm">
+	<div>
+		<br>
+		<button type="button" class="btn btn-default btn-lg" ui-sref=".create" ng-click="showForm=true">
+		  <span class="glyphicon glyphicon-star" aria-hidden="true"></span> Create
+		</button>
+		<button type="button" class="btn btn-default btn-lg" ng-click="getAll()">
+		  <span class="glyphicon glyphicon-star" aria-hidden="true"></span> Show All Products
+		</button>
+
+		<!-- <div class="btn-group">
+		  <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-expanded="false">
+		    Categories <span class="caret"></span>
+		  </button> -->
+
+		<select ng-model="selectCategory">
+			<option ng-repeat="category in categories" ng-selected="selectCategory">{{category.label}}</option>
+		</select>
+		<button ng-click="getCategory(selectCategory)">Go</button>
+	</div>
+
+	<br>
+
+	<table class="table table-striped"  >
+		<tr ng-repeat='product in products track by $index'>
+			<td contentEditable="true">{{ product.title }}</td>
+			<td>{{ product.description }}</td>
+			<td>Price: {{ product.price }}</td>
+			<td>{{ product.category }}</td>
+			<td> <img src="https://pbs.twimg.com/profile_images/378800000305778238/852d2f76797dbe1da82095f988d38fbe_400x400.png" alt="" height="42" width="42"></td>
+			<td class="fa fa-pencil" ng-model="product" ui-sref="adminOnly.products.edit" > Edit </td>
+			<td class="fa fa-trash-o" ng-click="deleteProduct(product)"> Delete</td>
+		</tr>
+	</table>
+</div>

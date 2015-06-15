@@ -1,0 +1,28 @@
+<div>
+
+  <div class="modal-header">
+    <h3>Edit User Setting</h3>
+  </div>
+
+  <div class="modal-body">
+  <div id="change-type">
+  <span>Change User Types</span>
+  <select ng-model='newUserType'>
+    <option ng-repeat="type in userTypes track by $index" ng-selected="newUserType">{{ type.label }}</option>
+    <!-- <option>Admin</option>
+    <option>Hero</option> -->
+  </select>
+  <button ng-click="updateUserType(newUserType)">Edit</button>
+  <div>
+
+  <div id="trigger-pw-reset">
+  <span>Trigger password reset</span>
+  <button>Trigger</button>
+  </div>
+  <div>
+
+  <div class="modal-footer">
+    <button class="btn btn-primary" ng-click="close()">Close</button>
+  </div>
+
+</div>

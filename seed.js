@@ -215,6 +215,7 @@ var seedProducts = function () {
 
 };
 
+
 connectToDb.then(function () {
 
     getCurrentUserData().then(function (users) {

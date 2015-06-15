@@ -35,8 +35,15 @@ var schema = new mongoose.Schema({
     },
     description: String,
     photo: String,
-    orders: [{type: mongoose.Schema.Types.ObjectId, ref: 'Order'}],
-    reviews:[{type: mongoose.Schema.Types.ObjectId, ref: 'Review'}]
+    orders: [{
+        type: mongoose.Schema.Types.ObjectId,
+        ref: 'Order'
+    }],
+    cart: Array,
+    reviews: [{
+        type: mongoose.Schema.Types.ObjectId,
+        ref: 'Review'
+    }]
 });
 
 // generateSalt, encryptPassword and the pre 'save' and 'correctPassword' operations
@@ -70,7 +77,7 @@ schema.method('correctPassword', function(candidatePassword) {
     return encryptPassword(candidatePassword, this.salt) === this.password;
 });
 
-function validateEmail (email) {
+function validateEmail(email) {
     var emailRegex = /^([\w-\.]+@([\w-]+\.)+[\w-]{2,4})?$/;
     return emailRegex.test(email);
 }

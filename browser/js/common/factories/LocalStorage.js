@@ -21,7 +21,7 @@ app.factory('LocalStorage', function (locker, $http) {
 			}
 			return $http.post('/api/cart', params)
 			.then(function (response) {
-				console.log(response);
+				locker.forget('cart');
 				return response.data;
 			})
 		}

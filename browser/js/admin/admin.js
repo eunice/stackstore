@@ -25,11 +25,11 @@ app.config(function ($stateProvider) {
         controller: 'ManageProductsCtrl'
     });
 
-    $stateProvider.state('adminOnly.products.edit', {
-        url: '/:id',
-        templateUrl: 'js/admin/template/editProducts.html',
-        controller: 'EditCtrl'
-    });
+    // $stateProvider.state('adminOnly.products.edit', {
+    //     url: '/:id',
+    //     templateUrl: 'js/admin/template/editProducts.html',
+    //     controller: 'ManageProductsCtrl'
+    // });
 
 
     $stateProvider.state('adminOnly.orders', {

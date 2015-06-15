@@ -1,4 +1,4 @@
-app.controller('ManageProductsCtrl', function ($location, $scope, AdminFactory, $state) {
+app.controller('ManageProductsCtrl', function ($location, $scope, AdminFactory, $state, $modal) {
   // $scope.$state = $state;
   // $scope.$watch('$state.$current.locals.globals.$stateParams.id', function () {
   //   // $scope.r
@@ -7,7 +7,7 @@ app.controller('ManageProductsCtrl', function ($location, $scope, AdminFactory, 
 
   AdminFactory.getProducts().then(function(products){
     $scope.products = products;
-    console.log('get all products', $scope.products)
+    // console.log('get all products', $scope.products)
     // console.log('hi',$state.$current.locals.globals.$stateParams.id)
   });
 
@@ -27,15 +27,6 @@ app.controller('ManageProductsCtrl', function ($location, $scope, AdminFactory, 
   { label: 'teachers'},
   { label: 'writers'}
   ];
-
-  // $scope.productModel = {
-  //   title: null,
-  //   description: null,
-  //   price: null,
-  //   quantity: null,
-  //   category: null,
-  //   img: null
-  // }
 
   $scope.selectCategory = null;
 
@@ -78,15 +69,6 @@ app.controller('ManageProductsCtrl', function ($location, $scope, AdminFactory, 
     $scope.showForm = true;
     AdminFactory.createProduct(product);
 
-    $scope.productModel = {
-      title: null,
-      description: null,
-      price: null,
-      quantity: null,
-      category: null,
-      img: null
-    }
-
     $state.go('adminOnly.products')
   }
 
@@ -96,7 +78,58 @@ app.controller('ManageProductsCtrl', function ($location, $scope, AdminFactory, 
     AdminFactory.deleteProduct(product._id);
   }
 
+  $scope.editProduct = function(product) {
+    $scope.showForm = true;
+    $scope.productPop = product;
+    console.log('hit edit product...',product)
+    // var id = product._id;
 
+    var modalInstance = $modal.open({
+      templateUrl: 'js/admin/template/editProducts.html',
+      controller: 'editProductCtrl',
+      resolve: {
+        product: function() {
+          return product;
+        }
+      }
+    });
+  }
 
 
 });
+
+app.controller('editProductCtrl', function($scope, AdminFactory, $modalInstance, product, $state) {
+  console.log('product model', product);
+
+  $scope.product = product;
+
+  $scope.categories = [
+  { label: 'chefs'},
+  { label: 'comedians'},
+  { label: 'designers'},
+  { label: 'entrepreneurs'},
+  { label: 'musicians'},
+  { label: 'teachers'},
+  { label: 'writers'}
+  ];
+  // $scope.selectCategory = $scope.categories.indexOf(product.category)
+  $scope.findCategory = function(category){
+    $scope.categories.forEach(a){
+      if(a.label = product.category){
+        return $scope.categories.indexOf(a);
+      }     
+    }
+  }
+
+  $scope.editProductDetail = function(productUpdate) {
+    console.log('updateType', productUpdate)
+    AdminFactory.editProduct(product._id, productUpdate)
+
+  }
+
+  $scope.close = function () {
+    $modalInstance.close();
+    $state.go('adminOnly.products')
+  }
+
+})

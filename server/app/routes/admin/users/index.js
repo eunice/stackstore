@@ -47,12 +47,14 @@ router.put('/:id', function(req, res, next) {
 		}, next);
 })
 
-//
-// router.post('/', function (req, res, next) {
-// 	// console.log('hit create product route', req.body)
-//     mongoose.model('Product').create(req.body)
-// 		.then(function(productinfo) {
-//           res.send(productinfo);
-//       }, next);
-// });
-//
+
+router.put('/updatepw/:id', function (req, res, next) {
+		console.log('hit pw reset', req.body.params)
+		var id = req.params.id;
+
+    mongoose.model('User').findOneAndUpdate({_id: id}, {reset: req.body.params})
+		.exec()
+		.then(function(user) {
+          res.send(user);
+      }, next);
+});

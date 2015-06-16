@@ -62,7 +62,35 @@ app.controller('ManageProductsCtrl', function ($location, $scope, AdminFactory, 
     AdminFactory.deleteProduct(product._id);
   }
 
+  $scope.deleteProduct = function(product){
+    console.log('deleteproduct', product)
+
+    //double check if this works later
+    setTimeout(function(){
+      close()
+    }, 3000)
+  }
+
+  $scope.editProduct = function(product) {
+    $scope.showForm = true;
+    $scope.productPop = product;
+    console.log('hit edit product...',product)
+    // var id = product._id;
+
+    var modalInstance = $modal.open({
+      templateUrl: 'js/admin/template/editProducts.html',
+      controller: 'editProductCtrl',
+      resolve: {
+        product: function() {
+          return product;
+        }
+      }
+    });
+  }
+
 });
+
+//Create Product Modal Controller---------------------------------------------------------------------------
 
 app.controller('createProductModalCtrl', function($scope, AdminFactory, $modalInstance, $state, $modal) {
 
@@ -124,37 +152,16 @@ app.controller('createProductModalCtrl', function($scope, AdminFactory, $modalIn
     }
 
     $scope.created = true;
+  }
+
+  $scope.close = function () {
+    $modalInstance.close();
     $state.go('adminOnly.products')
   }
 
-  $scope.deleteProduct = function(product){
-    console.log('deleteproduct', product)
-
-    //double check if this works later
-    setTimeout(function(){
-      close()
-    }, 3000)
-  }
-
-  $scope.editProduct = function(product) {
-    $scope.showForm = true;
-    $scope.productPop = product;
-    console.log('hit edit product...',product)
-    // var id = product._id;
-
-    var modalInstance = $modal.open({
-      templateUrl: 'js/admin/template/editProducts.html',
-      controller: 'editProductCtrl',
-      resolve: {
-        product: function() {
-          return product;
-        }
-      }
-    });
-  }
-
-
 });
+
+//--------------------------------------------------------------------------
 
 app.controller('editProductCtrl', function($scope, AdminFactory, $modalInstance, product, $state) {
   console.log('product model', product);

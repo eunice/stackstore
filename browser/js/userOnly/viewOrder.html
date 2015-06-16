@@ -1,0 +1,39 @@
+<div>
+
+  <div class="modal-header">
+    <h3>Your Order Details</h3>
+  </div>
+
+  <div class="modal-body">
+  <div id="update-status">
+  <ul>
+    <li>Order ID: {{order._id}}</li>
+    <li>Email: {{order.email}}</li>
+    <li>Shipping Address: {{order.shippingAddress}}</li>
+    <li>Credit Card: {{order.creditCard}}</li>
+    <li>Status: {{order.status}}</li>
+    <li>Date Created: {{order.dateCreated}}</li>
+  </ul>
+
+  <!-- Display all products  -->
+  <div>
+    <p>Item(s) Purchased:</p>
+    <ul ng-repeat="item in order.items track by $index">
+      <!-- insert product URL later -->
+      <li>Product ID: {{item.productId._id}}</li>
+      <li>Title: {{item.productId.title}}</li>
+      <li>Description: {{item.productId.description}}</li>
+      <li>Category: {{item.productId.category}}</li>
+      <li>Price: {{item.price}}</li>
+      <li>Quantity: {{item.quantity}}</li>
+      <img src="{{item.productId.img}}" height="50" width="50">
+    </ul>
+    <li>Subtotal: ${{ subtotal }}</li>
+  </div>
+  </div>
+
+  <div class="modal-footer">
+    <button class="btn btn-primary" ng-click="close()">Close</button>
+  </div>
+
+</div>

@@ -120,3 +120,15 @@ router.delete('/', function(req, res, next) {
 	}, next)
 
 })
+
+router.post('/api/updatepw', function(req, res, next) {
+	var newpw = req.body
+
+	mongoose.model('User')
+	.findOneAndUpdate({_id: req.user._id}, {password: req.body})
+	.exec()
+	.then(function (user) {
+		res.send(user)
+	}, next)
+
+})

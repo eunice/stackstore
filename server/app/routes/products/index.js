@@ -34,4 +34,13 @@ router.get('/search/:word', function (req, res, next) {
     },next);
 });
 
-
+router.get('/reviews/:id', function(req, res, next) {
+    console.log('route')
+    mongoose.model('Product')
+    .findById(req.params.id)
+    .populate('reviews')
+    .exec()
+    .then(function(product) {
+        res.status(200).send(product);
+    }, next)
+})

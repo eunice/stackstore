@@ -9,6 +9,12 @@ app.factory('Review', function ($http){
 			function(err){
 				return err;
 			})
+		},
+		getReviews: function(id) {
+			return $http.get('/api/products/reviews/' + id)
+			.then(function(response) {
+				return response.data;
+			})
 		}
 	}
 })

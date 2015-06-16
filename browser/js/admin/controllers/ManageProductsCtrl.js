@@ -1,9 +1,5 @@
 app.controller('ManageProductsCtrl', function ($location, $scope, AdminFactory, $state, $modal) {
-  // $scope.$state = $state;
-  // $scope.$watch('$state.$current.locals.globals.$stateParams.id', function () {
-  //   // $scope.r
-  // });
-  console.log('hit manage product controller', $location.path())
+  // console.nlog('hit manage product controller', $location.path())
 
   AdminFactory.getProducts().then(function(products){
 
@@ -11,13 +7,6 @@ app.controller('ManageProductsCtrl', function ($location, $scope, AdminFactory, 
     // console.log('get all products', $scope.products)
     // console.log('hi',$state.$current.locals.globals.$stateParams.id)
   });
-
-  // $scope.reloadRoute = function() {
-  //   var rand = Math.floor(Math.random()*100);
-  //   console.log(rand)
-  //   // $state.go('adminOnly.products', {id: rand})// {}
-  // }
-
 
   $scope.categories = [
     {label: 'comedians'},
@@ -97,33 +86,27 @@ app.controller('ManageProductsCtrl', function ($location, $scope, AdminFactory, 
     });
   }
 
-  $scope.deleteProduct = function(product){
-    console.log('deleteproduct', product)
-
-    //double check if this works later
-    setTimeout(function(){
-      close()
-    }, 3000)
-  }
-
   $scope.editProduct = function(product) {
-    $scope.showForm = true;
-    $scope.productPop = product;
     console.log('hit edit product...',product)
     // var id = product._id;
 
     var modalInstance = $modal.open({
       templateUrl: 'js/admin/template/editProducts.html',
-      controller: 'editProductCtrl',
+      controller: 'editProductModalCtrl',
       resolve: {
         product: function() {
           return product;
+        },
+        categories: function(){
+          return $scope.categories;
         }
       }
     });
   }
 
 });
+
+// Modal controllers----------------------------------
 
 app.controller('createProductModalCtrl', function($scope, AdminFactory, categories, $modalInstance, $state, $modal) {
 
@@ -193,7 +176,6 @@ app.controller('editProductModalCtrl', function($scope, AdminFactory, $modalInst
     // console.log('updateType', productUpdate)
     $scope.showAlert = true;
     AdminFactory.editProduct(product._id, productUpdate)
-
   }
 
   $scope.close = function () {
@@ -201,7 +183,7 @@ app.controller('editProductModalCtrl', function($scope, AdminFactory, $modalInst
     $state.go('adminOnly.products')
   }
 
-})
+});
 
 app.controller('deleteProductModalCtrl', function($scope, AdminFactory, $modalInstance, product, products, $state) {
   // console.log('hit modal controller',product)
@@ -220,4 +202,4 @@ app.controller('deleteProductModalCtrl', function($scope, AdminFactory, $modalIn
     $state.go('adminOnly.products')
   }
 
-})
+});

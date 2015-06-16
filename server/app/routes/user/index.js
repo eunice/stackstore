@@ -4,9 +4,15 @@ var _ = require('lodash');
 var router = require('express').Router();
 var q = require('q');
 module.exports = router;
-// .then(function (user) {
-// 	return user.orders.items.populate(orders, 'productId');
-// })
+
+router.put('/', function (req, res, next){
+	var id = req.user._id;
+	mongoose.model('User').findOneAndUpdate({_id: id}, {userType: 'Hero'})
+	.exec()
+	.then(function(user){
+		res.json(user)
+	}, next);
+})
 
 router.get('/:id', function (req, res, next) {
 	mongoose.model('User')

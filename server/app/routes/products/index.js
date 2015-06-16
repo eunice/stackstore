@@ -4,6 +4,7 @@ module.exports = router;
 var _ = require('lodash');
 var mongoose = require('mongoose');
 var bodyParser = require('body-parser');
+var deepPopulate = require('mongoose-deep-populate');
 
 router.get('/?', function (req, res, next) {
     var query;
@@ -39,6 +40,7 @@ router.get('/reviews/:id', function(req, res, next) {
     mongoose.model('Product')
     .findById(req.params.id)
     .populate('reviews')
+    .deepPopulate('reviews.userId')
     .exec()
     .then(function(product) {
         res.status(200).send(product);

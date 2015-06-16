@@ -5,46 +5,19 @@ app.config(function ($stateProvider) {
         url: '/becomehero',
         templateUrl: 'js/becomehero/becomehero.html',
         controller: 'BecomeHeroCtrl',
-        // resolve: {
-        //     tutorialInfo: function (TutorialFactory) {
-        //         return TutorialFactory.getTutorialVideos();
-        //     }
-        // }
     });
 
 });
 
-// app.factory('TutorialFactory', function ($http) {
-//
-//     return {
-//         getTutorialVideos: function () {
-//             return $http.get('/api/tutorial/videos').then(function (response) {
-//                 return response.data;
-//             });
-//         }
-//     };
-//
-// });
 
-app.controller('BecomeHeroCtrl', function ($scope, tutorialInfo) {
+app.controller('BecomeHeroCtrl', function ($scope, User) {
 
-    $scope.sections = tutorialInfo.sections;
-    $scope.videos = _.groupBy(tutorialInfo.videos, 'section');
-
-    $scope.currentSection = { section: null };
-
-    $scope.colors = [
-        'rgba(34, 107, 255, 0.10)',
-        'rgba(238, 255, 68, 0.11)',
-        'rgba(234, 51, 255, 0.11)',
-        'rgba(255, 193, 73, 0.11)',
-        'rgba(22, 255, 1, 0.11)'
-    ];
-
-    $scope.getVideosBySection = function (section, videos) {
-        return videos.filter(function (video) {
-            return video.section === section;
-        });
-    };
+    $scope.heroify = function () {
+        User.makeHero()
+        .then(function (response){
+            console.log(response);
+            return response;
+        })
+    }
 
 });

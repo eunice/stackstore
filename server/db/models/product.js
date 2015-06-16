@@ -1,4 +1,5 @@
 'use strict';
+var deepPopulate = require('mongoose-deep-populate');
 var mongoose = require('mongoose');
 
 var schema = new mongoose.Schema({
@@ -33,6 +34,14 @@ var schema = new mongoose.Schema({
     },
     reviews: [{type: mongoose.Schema.Types.ObjectId, ref: 'Review'}]
 });
+
+schema.plugin(deepPopulate, {
+  populate: {
+    'reviews.userId': {
+      select: 'displayName email photo'
+    }
+  }
+})
 
 
 mongoose.model('Product', schema);

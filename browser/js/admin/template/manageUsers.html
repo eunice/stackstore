@@ -10,15 +10,18 @@
 	  <span class="" aria-hidden="true"></span> Show All Users
 	</button>
 
-	<!-- <div class="btn-group">
-	  <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-expanded="false">
-	    Categories <span class="caret"></span>
-	  </button> -->
-
-		<select ng-model="selectUserType">
+	<div ng-model="selectUserType" class="btn-group btn-lg" dropdown is-open="status.isopen">
+	  <button type="button" class="btn btn-lg btn-primary dropdown-toggle" dropdown-toggle ng-disabled="disabled">
+	    User Type<span class="caret"></span>
+	  </button>
+	  <ul class="dropdown-menu" role="menu">
+	    <li ng-repeat="type in userTypes" ng-click="getUserTypes(type.label)" ng-selected="selectUserType"><a href="#">{{type.label}}</a></li>
+	  </ul>
+	</div>
+		<!-- <select ng-model="selectUserType">
 			<option ng-repeat="type in userTypes" ng-selected="selectUserType">{{type.label}}</option>
 		</select>
-		<button ng-click="getUserTypes(selectUserType)" class="btn btn-danger">Go</button>
+		<button ng-click="getUserTypes(selectUserType)" class="btn btn-danger">Go</button> -->
 </div>
 
 

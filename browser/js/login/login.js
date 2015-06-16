@@ -23,7 +23,7 @@ app.controller('LoginCtrl', function ($scope, AuthService, Session, $state, $win
 
             if (Session.user.reset === true) $state.go('resetPw')
 
-            $state.go('home');
+            else $state.go('home');
             // $location.href="http://localhost:1337/discover"
         }).catch(function () {
             $scope.error = 'Invalid login credentials.';

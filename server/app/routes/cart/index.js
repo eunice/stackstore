@@ -5,10 +5,13 @@ var _ = require('lodash');
 var mongoose = require('mongoose');
 var bodyParser = require('body-parser');
 var emailSender = require('./email.js')
+var deepPopulate = require('mongoose-deep-populate');
 
-router.post('/', function (req, res, next) {
+
+router.post('/', function(req, res, next) {
     var items = req.body.cart;
     var guestInfo = req.body.guest;
+    var productsToReturn;
     var cart = {
         items: [],
         userId: req.user ? req.user._id : null,
@@ -21,45 +24,66 @@ router.post('/', function (req, res, next) {
         cart.creditCard = guestInfo.creditCard;
     }
 
-
-    console.log('email sender before??', req.body)
-    emailSender(req.body)
-    console.log('email sender??')
-
-
-
     mongoose.model('Product').find({
-        '_id': { $in: Object.keys(items)}
-    })
-    .exec()
-    .then(function (products) {
-        products.forEach(function (product) {
-            cart.items.push({
-                price: product.price,
-                productId: product._id,
-                quantity: items[product._id]
+            '_id': {
+                $in: Object.keys(items)
+            }
+        })
+        .exec()
+        .then(function(products) {
+            products.forEach(function(product) {
+                cart.items.push({
+                    price: product.price,
+                    productId: product._id,
+                    quantity: items[product._id]
+                })
             })
         })
-    })
-    .then (function () {
-        return mongoose.model('Order').create(cart)
-    })
-    .then(function (cart) {
-        if (cart.userId) {
-            mongoose.model('User').findById(cart.userId)
-            .exec()
-            .then(function (user){
-    console.log("hit cart route route", user, "req.body", req.body, "cart", cart)
-                user.orders.push(cart._id)
-                user.save(function (err, user){
-                    res.status(200).send(cart)
-                });
+        .then(function() {
+            return mongoose.model('Order').create(cart)
+        })
+        .then(function(cart) {
 
+          console.log('email sender cart??',cart)
 
-            })
-        } else {
-            res.status(200).send(cart)
-        }
-    })
+            if (cart.userId) {
+                mongoose.model('User').findById(cart.userId)
+                    .exec()
+                    .then(function(user) {
+                        user.orders.push(cart._id)
+                        user.save(function(err, user) {
+                            // res.status(200).send(cart)
+                            mongoose.model('Order')
+                                .findById(cart._id)
+                                .populate('userId')
+                                .populate('items.productId')
+                                .exec()
+                                .then(function(order) {
+
+                                  console.log('email sender before??', order)
+                                  emailSender(order)
+                                  console.log('email sender??')
+
+                                    res.send(order)
+                                })
+                        });
+                    })
+            } else {
+                // res.status(200).send(cart)
+                mongoose.model('Order')
+                    .findById(cart._id)
+                    .populate('userId')
+                    .populate('items.productId')
+                    .exec()
+                    .then(function(order) {
+
+                      console.log('email sender before??', order)
+                      emailSender(order)
+                      console.log('email sender??')
+
+                        res.send(order)
+                    })
+            }
+        })
 
 });

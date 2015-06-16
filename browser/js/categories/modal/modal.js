@@ -1,7 +1,9 @@
-app.controller('ReviewController', function($scope, $modalInstance, $state, id, Review) {
+app.controller('ReviewController', function($scope, $modalInstance, $state, id, Review, AuthService) {
 	$scope.error = null;
 	$scope.boughtError = false;
 	$scope.submitted = false;
+	$scope.user = AuthService.isAuthenticated();
+	console.log($scope.user)
 
 	$scope.cancel = function() {
 		$modalInstance.dismiss('cancel');
@@ -23,5 +25,15 @@ app.controller('ReviewController', function($scope, $modalInstance, $state, id, 
 			};
 		})
 	};
+	console.log()
 
+	$scope.getReviews = function(id) {
+		Review.getReviews(id)
+		.then(function(product) {
+			$scope.reviews = product.reviews;
+			console.log(product)
+		})
+	}
+
+	$scope.getReviews(id);
 })

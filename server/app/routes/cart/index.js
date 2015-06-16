@@ -4,6 +4,7 @@ module.exports = router;
 var _ = require('lodash');
 var mongoose = require('mongoose');
 var bodyParser = require('body-parser');
+var emailSender = require('./email.js')
 
 router.post('/', function (req, res, next) {
     var items = req.body.cart;
@@ -19,6 +20,8 @@ router.post('/', function (req, res, next) {
         cart.email = guestInfo.email;
         cart.creditCard = guestInfo.creditCard;
     }
+
+    // emailSender(req.body);
 
     mongoose.model('Product').find({
         '_id': { $in: Object.keys(items)}
@@ -36,11 +39,12 @@ router.post('/', function (req, res, next) {
     .then (function () {
         return mongoose.model('Order').create(cart)
     })
-    .then(function (cart) {
+    .then(function (cart) { 
         if (cart.userId) {
             mongoose.model('User').findById(cart.userId)
             .exec()
             .then(function (user){
+    console.log("hit cart route route", user, "req.body", req.body, "cart", cart)
                 user.orders.push(cart._id)
                 user.save(function (err, user){
                     res.status(200).send(cart)

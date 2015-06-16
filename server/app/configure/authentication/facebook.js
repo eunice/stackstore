@@ -12,11 +12,13 @@ module.exports = function (app) {
     var facebookCredentials = {
         clientID: facebookConfig.clientID,
         clientSecret: facebookConfig.clientSecret,
-        callbackURL: facebookConfig.callbackURL
+        callbackURL: facebookConfig.callbackURL,
+        scope: ['email']
     };
 
     var verifyCallback = function (accessToken, refreshToken, profile, done) {
       console.log('facebook', profile);
+
         UserModel.findOne({ 'facebook.id': profile.id }, function (err, user) {
 
             if (err) return done(err);
@@ -30,7 +32,7 @@ module.exports = function (app) {
                     },
                     displayName: profile.displayName,
                     userType: "User",
-                    email: profile.id + '@facebook.com'
+                    email: profile._json.email
                 }).then(function (user) {
                     done(null, user);
                 }, function (err) {

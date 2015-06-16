@@ -23,7 +23,7 @@ app.factory('UserInfo', function ($http) {
 
         updatePw: function(pw) {
           console.log('update pw', pw);
-          return $http.post('/api/updatepw', pw).then(function(response) {
+          return $http.put('/api/user/updatepw', pw).then(function(response) {
             return response.data;
           })
         }

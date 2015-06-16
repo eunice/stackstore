@@ -1,4 +1,4 @@
-app.controller('AdminCtrl', function ($scope, Session, AuthService, AdminFactory, $state, Session) {
+app.controller('AdminCtrl', function ($scope, Session, AuthService, AdminFactory, $state) {
 
   // write the admin authen func
   (function isAdmin () {

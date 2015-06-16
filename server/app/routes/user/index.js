@@ -121,14 +121,20 @@ router.delete('/', function(req, res, next) {
 
 })
 
-router.post('/api/updatepw', function(req, res, next) {
+router.put('/updatepw', function(req, res, next) {
 	var newpw = req.body
 
+	console.log('update pw route', req.user)
+
 	mongoose.model('User')
-	.findOneAndUpdate({_id: req.user._id}, {password: req.body})
+	.findById(req.user._id)
 	.exec()
 	.then(function (user) {
-		res.send(user)
-	}, next)
+		user.password = req.body.password;
+		user.reset = req.body.reset;
+		return user.save()})
+	.then(function(updatedUser) {
+		res.send(updatedUser);
+	}).then(null, next)
 
 })

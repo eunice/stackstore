@@ -10,7 +10,7 @@ app.config(function ($stateProvider) {
     $stateProvider.state('adminOnly.products', {
         url: '/products',
         templateUrl: 'js/admin/template/manageProducts.html',
-        controller: 'ManageProductsCtrl',
+        controller: 'ManageProductsCtrl'
     });
 
     $stateProvider.state('adminOnly.orders', {

@@ -8,13 +8,15 @@ app.config(function ($stateProvider) {
 
 });
 
-app.controller('ResetPwCtrl', function ($scope, UserInfo, $state, $window, $location) {
+app.controller('ResetPwCtrl', function ($scope, Session, UserInfo, $state) {
 
   $scope.error = null;
+  $scope.incorrectOldPw = false;
   $scope.passwordMatch = false;
 
   $scope.newpw = {password: null}
 
+  // if (!correctPassword($scope.oldpw)) $scope.incorrectOldPw = true
 
   $scope.resetPw = function (pwInfo) {
 

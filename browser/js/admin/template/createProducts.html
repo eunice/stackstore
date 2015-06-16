@@ -1,16 +1,9 @@
 
-<div ng-if="!created">
+<div class="modal-header">
+  <h3> Create new product</h3>
+</div>
+<div class="modal-body">
 <form id="product-form" name="productForm" ng-submit="productForm.$valid && createProduct(productModel)">
-
-  <!-- Alert  -->
-  <!-- <alert type="danger" ng-show="productForm.pwField.$error.minlength">
-      Password needs to have at least 6 characters.
-  </alert>
-
-  <alert type="danger" ng-show="passwordMatch">
-      Password confirmation must match.
-  </alert> -->
-
     <div class="form-group">
         <label for="title">Title</label>
         <input type="text" name="title" ng-model="productModel.title" class="form-control" id="product-title" placeholder="Title">
@@ -32,11 +25,10 @@
     </div>
 
     <div class="form-group">
-        <label for="category">Category</label>
-        <select ng-model='productModel.category'>
-          <option ng-repeat="category in categories track by $index" ng-selected="productModel.category">{{ category.label }}</option>
-        </select>
-        <!-- <input type="text" name="category" ng-model="productModel.category" class="form-control" id="product-category" placeholder="Category"> -->
+      <label>Categories</label><br>
+      <select ng-model="productModel.category">
+        <option ng-repeat="cat in categories">{{ cat.label }}</option>
+      </select>
     </div>
 
     <div class="form-group">
@@ -47,17 +39,17 @@
       <img ng-show='productModel.img' src='{{productModel.img}}' height="50" width="50">
     </div>
 
+    <div>
+      <alert type="success" ng-show="created">Product information updated successfully!</alert>
+    </div>
+
     <button type="submit" class="btn btn-default">Submit</button>
 </form>
+</div>
 
 <div class="modal-footer">
   <button class="btn btn-primary" ng-click="close()">Close</button>
 </div>
-</div>
 
-<div ng-if="created">
-  <p>Product has been successfully created!</p>
-  <div class="modal-footer">
-    <button class="btn btn-primary" ng-click="close()">Close</button>
-  </div>
-</div>
+
+

@@ -8,50 +8,6 @@
   <alert type="danger" ng-show="passwordMatch">
       Password confirmation must match.
   </alert> -->
-<!-- <div>
-  <div class="modal-header">
-    <h3> Edit Product Details</h3>
-  </div>
-  <div class="model-body">
-  <div>
-      <label for="title">Title</label>
-      <li ng-bind="productPop.title" ng-model="productModel.title" id="product-title">{{ productPop.title }}</li>
-  </div>
-
-  <div>
-      <label for="description">Description</label>
-      <li ng-model="productModel.description" id="product-description">{{ productPop.description }}</li>
-  </div>
-
-  <div>
-      <label for="price">Price</label>
-      <li ng-model="productModel.price" id="product-price">{{ productPop.price }}</li>
-  </div>
-
-  <div>
-      <label for="quantity">Quantity</label>
-      <li ng-model="productModel.quantity" id="product-quantity">{{ productPop.quantity }}</li>
-  </div>
-
-  <div>
-    <label>Categories</label><br>
-    <select ng-model="categories">
-      <option ng-repeat="category in categories">{{ category.label }}</option>
-    </select>
-  </div>
-  <div>
-      <label for="category">Category</label>
-      <li ng-model="productModel.category" id="product-category">{{ productPop.category }}</li>
-  </div> -->
-
-<!--   <div>
-    <label> Image </label>
-    <li><img src="https://pbs.twimg.com/profile_images/378800000305778238/852d2f76797dbe1da82095f988d38fbe_400x400.png" alt="" height="42" width="42"></li>
-  </div>
-
-  <button type="submit" class="btn btn-default" ng-click="editProductDetail(productPop)">Submit</button>
-</div> -->
-
 
 <div class="modal-header">
   <h3> Edit Product Details</h3>
@@ -79,16 +35,10 @@
     </div>
 
     <div class="form-group">
-      <div>
-        <label>Categories</label><br>
-        <select ng-model="product.category"
-                ng-options="category.label for category in categories">
-          <!-- <option ng-repeat="category in categories" selected="product.category=category">{{ category.label }}</option> -->
-        </select>
-      </div>
-
-        <label for="category">Category</label>
-        <input type="text" name="category" ng-model="product.category" class="form-control" id="product-category" >
+      <label>Categories</label><br>
+      <select ng-model="product.category">
+        <option ng-repeat="cat in categories">{{ cat.label }}</option>
+      </select>
     </div>
 
     <div class="form-group">
@@ -96,9 +46,13 @@
       <input type="file" accept="image/*" name="img" ng-file-select="uploadImg($files)" id="product-image">
     </div>
 
+    <div>
+      <alert type="success" ng-show="showAlert">Product information updated successfully!</alert>
+    </div>
+
     <button type="submit" class="btn btn-default">Submit</button>
 </form>
+</div>
   <div class="modal-footer">
     <button class="btn btn-primary" ng-click="close()">Close</button>
   </div>
-</div>

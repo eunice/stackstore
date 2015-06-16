@@ -3,11 +3,11 @@
 <div>
 	<div>
 		<br>
-		<button type="button" class="btn btn-default btn-lg" ng-click="createProduct()">
-		  <span class="glyphicon glyphicon-star" aria-hidden="true"></span> Create
+		<button type="button" class="btn btn-primary btn-lg" ng-click="createProduct()">
+		  <span class="fa fa-plus" aria-hidden="true"></span> Create
 		</button>
-		<button type="button" class="btn btn-default btn-lg" ng-click="getAll()">
-		  <span class="glyphicon glyphicon-star" aria-hidden="true"></span> Show All Products
+		<button type="button" class="btn btn-primary btn-lg" ng-click="getAll()">
+		  <span class="" aria-hidden="true"></span> Show All Products
 		</button>
 
 		<!-- <div class="btn-group">
@@ -18,7 +18,7 @@
 		<select ng-model="selectCategory">
 			<option ng-repeat="category in categories" ng-selected="selectCategory">{{category.label}}</option>
 		</select>
-		<button ng-click="getCategory(selectCategory)">Go</button>
+		<button ng-click="getCategory(selectCategory)" class="btn btn-default">Go</button>
 	</div>
 
 	<br>

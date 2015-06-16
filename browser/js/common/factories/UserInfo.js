@@ -19,9 +19,14 @@ app.factory('UserInfo', function ($http) {
         		return response.data;
         	});
 
+        },
+
+        updatePw: function(pw) {
+          console.log('update pw', pw);
+          return $http.put('/api/user/updatepw', pw).then(function(response) {
+            return response.data;
+          })
         }
     };
 
 });
-
-//REMB TO SET UP /SIGNUP ROUTER

@@ -18,11 +18,7 @@ app.controller('UserCtrl', function ($scope, AuthService, Session) {
 
   (function isUser () {
 
-    AuthService.getLoggedInUser().then(function (user) {
-        $scope.user = user;
-        console.log('user contrl auth', $scope.user.userType)
-        if ($scope.user.userType === "User") $scope.isUser=true
-    });
+    if (Session.user.userType === "User") $scope.isUser=true
 
   })()
 

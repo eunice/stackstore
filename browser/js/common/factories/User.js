@@ -8,6 +8,12 @@ app.factory('User', function ($http) {
 				console.log(response)
 				return response.data;
 			})
+		},
+		makeHero: function () {
+			return $http.put('api/user')
+			.then(function (response) {
+				return response.data;
+			})
 		}
 	}
 })

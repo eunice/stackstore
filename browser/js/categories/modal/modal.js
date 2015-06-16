@@ -3,7 +3,6 @@ app.controller('ReviewController', function($scope, $modalInstance, $state, id, 
 	$scope.boughtError = false;
 	$scope.submitted = false;
 	$scope.user = AuthService.isAuthenticated();
-	console.log($scope.user)
 
 	$scope.cancel = function() {
 		$modalInstance.dismiss('cancel');
@@ -21,18 +20,21 @@ app.controller('ReviewController', function($scope, $modalInstance, $state, id, 
 			else {
 				$scope.boughtError = false;
 				$scope.submitted = true;
-				// $modalInstance.close();
 			};
 		})
 	};
-	console.log()
 
 	$scope.getReviews = function(id) {
 		Review.getReviews(id)
 		.then(function(product) {
+			console.log(product);
 			$scope.reviews = product.reviews;
-			console.log(product)
 		})
+	}
+
+	$scope.toProfile = function(id) {
+		$modalInstance.close();
+		$state.go('Profile', {id: id})
 	}
 
 	$scope.getReviews(id);

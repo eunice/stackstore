@@ -5,7 +5,8 @@
   <div class="modal-body">
   <h3>Recent Reviews</h3>
   <div ng-repeat="review in reviews">
-    <span>{{review.review}}</span>
+    <a ng-click='toProfile(review.userId._id)' href='#'>{{ review.userId.displayName || review.userId.email }}:</a>
+    <p> {{review.review}}</p>
     <div class="form-group">
        <rating readonly="true" ng-model="review.stars" max="5"></rating>
     </div>

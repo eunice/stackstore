@@ -8,7 +8,7 @@ app.config(function($stateProvider) {
 	});
 });
 
-app.controller('ProfileController', function ($scope, $stateParams, User) {
+app.controller('ProfileController', function ($scope, $stateParams, User, GetProductsForCategory) {
 	$scope.user = null;
 
 	$scope.getUser = function (id) {
@@ -18,6 +18,6 @@ app.controller('ProfileController', function ($scope, $stateParams, User) {
 			$scope.user = user;
 		})
 	};
-
+	GetProductsForCategory.getById
 	$scope.getUser();
 });

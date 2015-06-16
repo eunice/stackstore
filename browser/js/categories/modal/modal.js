@@ -33,8 +33,8 @@ app.controller('ReviewController', function($scope, $modalInstance, $state, id, 
 	}
 
 	$scope.toProfile = function(id) {
-		$modalInstance.close();
 		$state.go('Profile', {id: id})
+		$modalInstance.close();
 	}
 
 	$scope.getReviews(id);

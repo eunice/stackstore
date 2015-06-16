@@ -17,6 +17,7 @@ app.controller('CategoryController', function ($scope, $stateParams, GetProducts
 		$scope.products = products;
 	});
 	$scope.addItem = function (item) {
+		console.log(AuthService.isAuthenticated())
 		if (!AuthService.isAuthenticated()) {
 			return LocalStorage.addItemToCart(item);
 		} else {

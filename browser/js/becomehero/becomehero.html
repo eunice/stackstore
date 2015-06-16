@@ -1,1 +1,29 @@
-<button id='hero-btn' ng-click='heroify()' class='btn btn-lg btn-primary'><span class='glyphicon glyphicon-king' aria-hidden='true'></span> BECOME A HERO</button>
+<button ng-if='!isHero'id='hero-btn' ng-click='heroify()' class='btn btn-lg btn-primary'><span class='glyphicon glyphicon-king' aria-hidden='true'></span> BECOME A HERO</button>
+
+<h1>{{ user.displayName.split(' ')[0] }}'s Store Management</h1>
+
+<button type="button" class="btn btn-primary btn-lg" ng-click="createProduct()">
+	<span class="fa fa-plus" aria-hidden="true"></span> Create
+</button>
+
+<table class="table table-striped">
+	<tr>
+		<th>Title</th>
+		<th>Description</th>
+		<th>Price</th>
+		<th>Category</th>
+		<th>Picture</th>
+		<th>Edit</th>
+		<th>Delete</th>
+	</tr>
+	<tr ng-repeat='product in products track by $index'>
+		<td>{{ product.title }}</td>
+		<td>{{ product.description }}</td>
+		<td>${{ product.price }}</td>
+		<td>{{ product.category }}</td>
+		<td><img src="{{ product.img }}" alt="" height="42" width="42"></td>
+		<td><span class="fa fa-pencil" ng-model="product" ng-click="editProduct(product)">Edit</span></td>
+		<td class="fa fa-trash-o" ng-click="deleteProduct(product)"> Delete</td>
+	</tr>
+</table>
+

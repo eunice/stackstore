@@ -38,7 +38,11 @@ app.controller('CartController', function ($scope, $stateParams, GetProductsForC
 
 	$scope.removeItem = function (itemId) {
 		if (AuthService.isAuthenticated())
-			return Storage.removeItemFromCart(itemId);
+			return Storage.removeItemFromCart(itemId)
+		.then(function() {
+			$scope.products.splice($scope.products.indexOf(itemId),1);
+
+		})
 		else
 			return LocalStorage.removeItemFromCart(itemId);
 	};

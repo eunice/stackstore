@@ -22,6 +22,7 @@ module.exports = function (app) {
             if (err) return done(err);
 
             if (user) {
+                console.log(user);
                 done(null, user);
             } else {
                 UserModel.create({

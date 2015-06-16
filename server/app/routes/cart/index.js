@@ -4,6 +4,7 @@ module.exports = router;
 var _ = require('lodash');
 var mongoose = require('mongoose');
 var bodyParser = require('body-parser');
+var emailSender = require('./email.js')
 var deepPopulate = require('mongoose-deep-populate');
 
 
@@ -42,6 +43,9 @@ router.post('/', function(req, res, next) {
             return mongoose.model('Order').create(cart)
         })
         .then(function(cart) {
+
+          console.log('email sender cart??',cart)
+
             if (cart.userId) {
                 mongoose.model('User').findById(cart.userId)
                     .exec()
@@ -55,6 +59,11 @@ router.post('/', function(req, res, next) {
                                 .populate('items.productId')
                                 .exec()
                                 .then(function(order) {
+
+                                  console.log('email sender before??', order)
+                                  emailSender(order)
+                                  console.log('email sender??')
+
                                     res.send(order)
                                 })
                         });
@@ -67,6 +76,11 @@ router.post('/', function(req, res, next) {
                     .populate('items.productId')
                     .exec()
                     .then(function(order) {
+
+                      console.log('email sender before??', order)
+                      emailSender(order)
+                      console.log('email sender??')
+
                         res.send(order)
                     })
             }

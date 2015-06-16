@@ -10,15 +10,14 @@
 		  <span class="" aria-hidden="true"></span> Show All Products
 		</button>
 
-		<!-- <div class="btn-group">
-		  <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-expanded="false">
-		    Categories <span class="caret"></span>
-		  </button> -->
-
-		<select ng-model="selectCategory">
-			<option ng-repeat="category in categories" ng-selected="selectCategory">{{category.label}}</option>
-		</select>
-		<button ng-click="getCategory(selectCategory)" class="btn btn-default">Go</button>
+		<div ng-model="selectCategory" class="btn-group btn-lg" dropdown is-open="status.isopen">
+	      <button type="button" class="btn btn-lg btn-primary dropdown-toggle" dropdown-toggle ng-disabled="disabled">
+	        Product Category<span class="caret"></span>
+	      </button>
+	      <ul class="dropdown-menu" role="menu">
+	        <li ng-repeat="category in categories" ng-click="getCategory(category.label)" ng-selected="selectCategory"><a href="#">{{category.label}}</a></li>
+	      </ul>
+	    </div>
 	</div>
 
 	<br>

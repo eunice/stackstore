@@ -3,9 +3,10 @@ app.controller('ManageProductsCtrl', function ($location, $scope, AdminFactory, 
   // $scope.$watch('$state.$current.locals.globals.$stateParams.id', function () {
   //   // $scope.r
   // });
-  // console.log('hit manage product controller', $location.path())
+  console.log('hit manage product controller', $location.path())
 
   AdminFactory.getProducts().then(function(products){
+
     $scope.products = products;
     // console.log('get all products', $scope.products)
     // console.log('hi',$state.$current.locals.globals.$stateParams.id)
@@ -88,6 +89,9 @@ app.controller('ManageProductsCtrl', function ($location, $scope, AdminFactory, 
       resolve: {
         product: function(){
           return product;
+        },
+        products: function(){
+          return $scope.products;
         }
       }
     });
@@ -175,14 +179,16 @@ app.controller('editProductModalCtrl', function($scope, AdminFactory, $modalInst
 
 })
 
-app.controller('deleteProductModalCtrl', function($scope, AdminFactory, $modalInstance, product, $state) {
+app.controller('deleteProductModalCtrl', function($scope, AdminFactory, $modalInstance, product, products, $state) {
   // console.log('hit modal controller',product)
   $scope.product = product;
+  $scope.products = products;
 
   $scope.deleteProductConf = function(product) {
     // console.log('hit delete conf', product)
     $scope.showAlert = true;
     AdminFactory.deleteProduct(product._id);
+    console.log('scope.products', $scope.products)
   }
 
   $scope.close = function () {

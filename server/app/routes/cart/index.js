@@ -5,8 +5,6 @@ var _ = require('lodash');
 var mongoose = require('mongoose');
 var bodyParser = require('body-parser');
 var emailSender = require('./email.js')
-var mandrill = require('mandrill-api/mandrill');
-var mandrill_client = new mandrill.Mandrill('vDMsj0tlxEj5ONebunR34g');
 
 router.post('/', function (req, res, next) {
     var items = req.body.cart;
@@ -23,9 +21,11 @@ router.post('/', function (req, res, next) {
         cart.creditCard = guestInfo.creditCard;
     }
 
+
     console.log('email sender before??', req.body)
     emailSender(req.body)
     console.log('email sender??')
+
 
 
     mongoose.model('Product').find({
@@ -49,6 +49,7 @@ router.post('/', function (req, res, next) {
             mongoose.model('User').findById(cart.userId)
             .exec()
             .then(function (user){
+    console.log("hit cart route route", user, "req.body", req.body, "cart", cart)
                 user.orders.push(cart._id)
                 user.save(function (err, user){
                     res.status(200).send(cart)

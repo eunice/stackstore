@@ -14,7 +14,7 @@ var emailSender = function (info) {
   var template_content = [
     {
         "name": "orderid",
-        "content": "<li>Order ID:" + info._id + "/li>"
+        "content": "<li>Order ID: " + info._id + "</li>"
     }
     ];
 

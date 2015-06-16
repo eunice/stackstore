@@ -51,7 +51,6 @@ app.controller('ManageUsersCtrl', function ($scope, AdminFactory, $state, $modal
 
   }
 
-
 });
 
 app.controller('editUserModalCtrl', function($scope, AdminFactory, $modalInstance, id, $state) {
@@ -60,7 +59,12 @@ app.controller('editUserModalCtrl', function($scope, AdminFactory, $modalInstanc
 
   $scope.updateUserType = function(type) {
     console.log('updateType', type)
-    AdminFactory.updateUserType(id, type)
+    AdminFactory.updateUserType(id, type);
+  }
+
+  $scope.pwReset = function() {
+    console.log('pwReset', id)
+    AdminFactory.pwReset(id);
   }
 
   $scope.userTypes = [

@@ -1,6 +1,7 @@
 'use strict';
 var crypto = require('crypto');
 var mongoose = require('mongoose');
+var deepPopulate = require('mongoose-deep-populate');
 
 var schema = new mongoose.Schema({
     displayName: {
@@ -43,8 +44,19 @@ var schema = new mongoose.Schema({
     reviews: [{
         type: mongoose.Schema.Types.ObjectId,
         ref: 'Review'
-    }]
+    }],
+    reset: {
+      type: Boolean
+    }
 });
+
+schema.plugin(deepPopulate, {
+  populate: {
+    'orders.items.productId': {
+      select: 'title description category img'
+    }
+  }
+})
 
 // generateSalt, encryptPassword and the pre 'save' and 'correctPassword' operations
 // are all used for local authentication security.

@@ -6,8 +6,8 @@
 <div>
 	<br>
 
-	<button type="button" class="btn btn-default btn-lg" ng-click="getAll()">
-	  <span class="glyphicon glyphicon-star" aria-hidden="true"></span> Show All Users
+	<button type="button" class="btn btn-primary btn-lg" ng-click="getAll()">
+	  <span class="" aria-hidden="true"></span> Show All Users
 	</button>
 
 	<!-- <div class="btn-group">
@@ -18,7 +18,7 @@
 		<select ng-model="selectUserType">
 			<option ng-repeat="type in userTypes" ng-selected="selectUserType">{{type.label}}</option>
 		</select>
-		<button ng-click="getUserTypes(selectUserType)">Go</button>
+		<button ng-click="getUserTypes(selectUserType)" class="btn btn-danger">Go</button>
 </div>
 
 
@@ -26,25 +26,24 @@
 
 <table class="table table-striped"  >
 	<tr>
-    <td>Display Name</td>
-    <td>Type</td>
-    <td>Email</td>
-    <td>Facebook Id</td>
-    <td>Google Id</td>
-    <td></td>
-    <td></td>
+	    <td>Display Name</td>
+	    <td>Type</td>
+	    <td>Email</td>
+	    <td>Facebook Id</td>
+	    <td>Google Id</td>
+	    <td></td>
+	    <td></td>
+	</tr>
 
     <tr ng-repeat='user in users track by $index'>
 		<td>{{ user.displayName }}</td>
 		<td>{{ user.userType }}</td>
 		<td>{{ user.email }}</td>
 		<td>{{ user.facebook.id }}</td>
-    <td>{{ user.google.id }}</td>
+	    <td>{{ user.google.id }}</td>
 		<td class="fa fa-pencil" ng-click="editUser(user)"> Setting </td>
 		<td class="fa fa-trash-o" ng-click="deleteUser(user)"> Delete</td>
     </tr>
-
-	</tr>
 </table>
 </div>
 

@@ -67,6 +67,14 @@ app.factory('AdminFactory', function ($http) {
 			})
 		},
 
+		pwReset: function(id) {
+			console.log('pw reset factory', id)
+			return $http.put('api/admin/users/updatepw/' + id, {params: true})
+			.then(function(response) {
+				return response.data;
+			})
+		},
+
 		//Orders------------------------------------------------------
 		getOrders: function(status) {
 			console.log('get order factory', status)

@@ -8,7 +8,7 @@ app.config(function ($stateProvider) {
 
 });
 
-app.controller('LoginCtrl', function ($scope, AuthService, $state, $window) {
+app.controller('LoginCtrl', function ($scope, AuthService, Session, $state, $window, $location) {
 
     $scope.login = {};
     $scope.error = null;
@@ -17,8 +17,14 @@ app.controller('LoginCtrl', function ($scope, AuthService, $state, $window) {
 
         $scope.error = null;
 
+
         AuthService.login(loginInfo).then(function () {
-            $state.go('home');
+            console.log('hello', Session.user)
+
+            if (Session.user.reset === true) $state.go('resetPw')
+
+            else $state.go('home');
+            // $location.href="http://localhost:1337/discover"
         }).catch(function () {
             $scope.error = 'Invalid login credentials.';
         });
@@ -26,7 +32,9 @@ app.controller('LoginCtrl', function ($scope, AuthService, $state, $window) {
     };
 
     $scope.redirectLogin = function(location){
-        $window.location.href = "/auth/" + location;
+      console.log('oauth', location)
+      $window.location.href = "/auth/" + location;
+        // $state.go('discover');
     };
 
 });

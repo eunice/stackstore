@@ -1,6 +1,7 @@
 'use strict';
 var mongoose = require('mongoose');
 var _ = require('lodash');
+var deepPopulate = require('mongoose-deep-populate');
 var router = require('express').Router();
 var q = require('q');
 module.exports = router;
@@ -15,9 +16,11 @@ router.put('/', function (req, res, next){
 })
 
 router.get('/:id', function (req, res, next) {
+
 	mongoose.model('User')
 	.findById(req.params.id)
 	.populate('orders')
+	.deepPopulate('orders.items.productId')
 	.populate('reviews')
 	.exec()
 	.then(function (user){
@@ -31,6 +34,7 @@ router.get('/', function (req, res, next) {
 	mongoose.model('User')
 	.findById(req.user._id)
 	.populate('orders')
+	.deepPopulate('orders.productId')
 	.populate('reviews')
 	.exec()
 	.then(function (user) {

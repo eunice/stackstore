@@ -20,6 +20,15 @@
 	padding-bottom: 30px;
 
 }
+#bin-btn {
+	border: none;
+	float: right;
+	&:hover {
+		color: $cyan;	      
+	}
+	z-index: 10;
+
+}
 
 #product-card {
 	cursor: default;
@@ -29,35 +38,10 @@
 	height: 330px;
 	width: 100%;
 	position: relative;
-	// position: fixed;
-	// left: 0;
-	// right: 0;
-	// z-index: 0;
-	// margin-left
-	// -webkit-filter: blur(3px); 
-	// filter: blur(3px);
-	// &:hover {
-	// 	-webkit-filter: blur(0px); 
-	// 	filter: blur(0px);
-	// }
 }
-// #product-card:before {
-//   content: "";
-//   position: relative;
-//   width: 100%;
-//   height: 330px;
-//   // z-index: 2;
-//   display: block;
-//   background-image: url('http://666a658c624a3c03a6b2-25cda059d975d2f318c03e90bcf17c40.r92.cf1.rackcdn.com/unsplash_527bf56961712_1.JPG');
-//   -webkit-filter: blur(5px);
-//   -moz-filter: blur(5px);
-//   -o-filter: blur(5px);
-//   -ms-filter: blur(5px);
-//   filter: blur(5px);
-// }
+
 
 #card-contents {
-	// -webkit-filter: blur(0px); filter: blur(0px);
 	text-shadow: 1px 0px black;
 	padding-left: 20px;
 	bottom: -90px;
@@ -75,5 +59,4 @@
 
 .card-blurb {
 	font-size: 1.5em;
-	 // text-shadow: 1px 0 0 $cyan;
 }

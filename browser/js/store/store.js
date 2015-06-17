@@ -1,10 +1,10 @@
 'use strict';
 app.config(function($stateProvider) {
 
-	$stateProvider.state('Profile', {
-		url: '/profile/:id',
+	$stateProvider.state('store', {
+		url: '/store/:id',
 		controller: 'ProfileController',
-		templateUrl: 'js/profile/profile.html'
+		templateUrl: 'js/store/store.html'
 	});
 });
 

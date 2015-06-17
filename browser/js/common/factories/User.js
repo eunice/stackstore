@@ -3,9 +3,8 @@
 app.factory('User', function ($http) {
 	return {
 		getAll: function (id) {
-			return $http.get('/api/user/'+id)
+			return $http.get('/api/user/')
 			.then(function (response) {
-				console.log(response)
 				return response.data;
 			})
 		},

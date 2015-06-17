@@ -8,11 +8,11 @@ app.directive('navbar', function ($rootScope, AuthService, AUTH_EVENTS, $state, 
         link: function (scope) {
             // scope.users;
             scope.items = [
-                { label: 'Home', state: 'home' },
-                { label: 'Discover', state: 'discover' },
-                { label: 'Become a hero', state: 'becomehero' },
-                { label: 'Admin Only', state: 'adminOnly', adminauth: true },
-                { label: 'View Account', state: 'userOnly', auth: true}
+                { label: 'Home', state: 'home', icon: 'home' },
+                { label: 'Discover', state: 'discover', icon: 'star' },
+                { label: 'Become a hero', state: 'becomehero', icon: 'university' },
+                { label: 'Admin Only', state: 'adminOnly', adminauth: true, icon: 'user-secret' },
+                { label: 'View Account', state: 'userOnly', auth: true, icon: 'user'}
             ];
 
             scope.user = null;

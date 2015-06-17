@@ -6,3 +6,18 @@
 		</small>
 	</h1>
 </div>
+<div class="container">
+	<ul id='products'>
+		<li id='product' ng-repeat='product in products track by $index'>
+			<div id='product-card' style='background-image: url({{product.img}})'>
+				<div id="card-contents">
+					<h1>{{ product.title }} <span ng-click='addItem(product._id)'><button class='btn btn-primary'>ADD TO CART</button></span><span ng-click='open(product._id)'><button class='btn btn-primary'>REVIEWS</button></span></h1>
+					<h4>${{ product.price }} | Quantity: {{ product.quantity }}</h4>
+					<div class="card-blurb">
+						{{ product.description }}
+					</div>
+				</div>
+			</div>
+		</li>
+	</ul>
+</div>

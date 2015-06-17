@@ -1,5 +1,4 @@
-app.controller('HeroController', function($scope, Hero, categories, $modalInstance, $state, $modal) {
-
+app.controller('HeroController', function($scope, Hero, categories, product, $modalInstance, $state, $modal) {
   $scope.created = false;
   $scope.categories = categories;
   $scope.productModel = {
@@ -11,8 +10,8 @@ app.controller('HeroController', function($scope, Hero, categories, $modalInstan
     img: null
   }
 
-  $scope.createProduct = function (product) {
-    Hero.createProduct(product);
+  $scope.createProduct = function(createdProduct) {
+    Hero.createProduct(createdProduct);
     $scope.productModel = {
       title: null,
       description: null,
@@ -24,7 +23,17 @@ app.controller('HeroController', function($scope, Hero, categories, $modalInstan
     $scope.created = true;
   }
 
-  $scope.close = function () {
+  $scope.editProductDetail = function(productUpdate) {
+    $scope.showAlert = true;
+    Hero.editProduct(product._id, productUpdate)
+  }
+
+  $scope.deleteProductConf = function() {
+    $scope.showAlert = true;
+    Hero.deleteProduct(product._id);
+  }
+
+  $scope.close = function() {
     $modalInstance.close();
   }
 

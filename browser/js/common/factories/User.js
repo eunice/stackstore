@@ -5,7 +5,6 @@ app.factory('User', function ($http) {
 		getAll: function (id) {
 			return $http.get('/api/user/')
 			.then(function (response) {
-				console.log(response)
 				return response.data;
 			})
 		},

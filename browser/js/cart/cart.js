@@ -14,29 +14,35 @@ app.controller('CartController', function ($scope, $stateParams, GetProductsForC
 	$scope.cart = null;
 	$scope.ordered = false;
 	$scope.total = 0;
+	$scope.user;
+
 
 	$scope.getProductIds = function () {
-		//refreshing page doesn't work atm
-		console.log(AuthService.isAuthenticated());
-		if (AuthService.isAuthenticated()) {
-			return Storage.getCart()
-			.then(function(itemIds){
-				console.log('hi',itemIds)
-				$scope.productIds = itemIds;
-				$scope.idArray = Object.keys($scope.productIds);
-				console.log('auth id array',$scope.idArray)
+		AuthService.getLoggedInUser().then(function(user) {
+			$scope.user = user;
+
+			if ($scope.user) {
+				return Storage.getCart()
+					.then(function(itemIds) {
+						$scope.productIds = itemIds;
+						$scope.idArray = Object.keys($scope.productIds);
+						getItems();
+					})
+			} else {
+				$scope.productIds = LocalStorage.getCart();
+				$scope.idArray = $scope.productIds ? Object.keys($scope.productIds) : null;
 				getItems();
-			})
-		} else {
-			$scope.productIds = LocalStorage.getCart();
-			$scope.idArray = Object.keys($scope.productIds);
-			getItems();
-		}
+			}
+		});
 	}
 
 	$scope.getProductIds();
 
 	$scope.removeItem = function (itemId) {
+		$scope.products.forEach(function(product, ix){
+			if (product._id === itemId) 
+				$scope.products.splice(ix, 1);
+		})
 		if (AuthService.isAuthenticated())
 			return Storage.removeItemFromCart(itemId)
 		.then(function() {
@@ -59,13 +65,14 @@ app.controller('CartController', function ($scope, $stateParams, GetProductsForC
 		.then(function (user){
 			if (!user) return $scope.open();
 
-			else Storage.checkoutCart()
-				.then (function (cart) {
-					console.log('hello',cart);
-					$scope.cart = cart;
-					$scope.ordered = true;
-					sumPrice();
-				})
+			// else Storage.checkoutCart()
+			// 	.then (function (cart) {
+			// 		console.log('hello',cart);
+			// 		$scope.cart = cart;
+			// 		$scope.ordered = true;
+			// 		sumPrice();
+			// 	})
+			else return $scope.openUser();
 		})
 		
 	};
@@ -80,6 +87,7 @@ app.controller('CartController', function ($scope, $stateParams, GetProductsForC
 		})
 	}
 
+	
 	$scope.animationsEnabled = true;
 
 	$scope.open = function (size) {
@@ -88,6 +96,27 @@ app.controller('CartController', function ($scope, $stateParams, GetProductsForC
 			animation: $scope.animationsEnabled,
 			templateUrl: 'js/cart/modal/modal.html',
 			controller: 'GuestController',
+			size: 'lg',
+			resolve: {
+				items: function () {
+					return $scope.items;
+				}
+			}
+		});
+
+		modalInstance.result.then(function (selectedItem) {
+			$scope.selected = selectedItem;
+		}, function () {
+			// $log.info('Modal dismissed at: ' + new Date());
+		});
+	};
+
+	$scope.openUser = function (size) {
+
+		var modalInstance = $modal.open({
+			animation: $scope.animationsEnabled,
+			templateUrl: 'js/cart/cart.html',
+			controller: 'UserCheckoutController',
 			size: 'lg',
 			resolve: {
 				items: function () {

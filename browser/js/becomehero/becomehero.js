@@ -28,7 +28,7 @@ app.controller('BecomeHeroCtrl', function ($scope, User, $modal, Hero) {
     User.getAll()
         .then(function(response) {
             $scope.user = response;
-            $scope.isHero = response.userType === 'Hero' || 'Admin';
+            $scope.isHero = response.userType === 'Hero' || response.userType === 'Admin';
         })
 
     $scope.heroify = function() {

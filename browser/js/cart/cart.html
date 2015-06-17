@@ -1,9 +1,10 @@
 <div ng-if='!ordered' class='container'>
+<div class="page-header"><h1>Cart Summary</h1></div>
 	<ul id='products'>
 		<li id='product' ng-repeat='product in products track by $index'>
 		<div id='product-card' style='background-image: url({{product.img}})'>
 			<div id="card-contents">
-				<h1>{{ product.title }} <span ng-click='removeItem(product._id)'><button id='bin-btn' class='btn-primary'><i class="fa fa-trash-o fa-3 faa-shake animated-hover faa-fast"></i></button></span></h1>
+				<h1>{{ product.title }} <span ng-click='removeItem(product._id)'><button class='btn btn-warning'>REMOVE FROM CART</button></span></h1>
 				<h4>${{ product.price }}</h2>
 					<div class="card-blurb">
 						{{ product.description }}

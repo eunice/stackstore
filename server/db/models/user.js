@@ -58,6 +58,8 @@ schema.plugin(deepPopulate, {
   }
 })
 
+
+
 // generateSalt, encryptPassword and the pre 'save' and 'correctPassword' operations
 // are all used for local authentication security.
 var generateSalt = function() {

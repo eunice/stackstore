@@ -1,3 +1,15 @@
+#nav-icons {
+  font-size: 1.6em;
+  margin: 3px 3px;
+}
+#search-bar {
+  padding-top: 3.3px;
+  .fa-search {
+    position: relative;
+    top: 3.7px;
+    left: 5px;
+  }
+}
 .navbar {
   margin-bottom: 0px !important;
   border-bottom: solid 1px #d9d9de;
@@ -37,10 +49,13 @@
     float: right;
     margin-top: 8px;
   }
-
+  .glyphicon {
+    font-size: 3em;
+  }
   .welcome {
+    font-size: 1.2em;
     float: right;
-    margin-top: 15px;
+    margin-top: 18px;
     padding-left: 0px;
     span {
       color: black;
@@ -57,10 +72,10 @@
 
 #search-btn {
   padding-top: 5px;
-    margin-right: 20px;
-    width: 30px;
+    margin-right: 17px;
+    width: 60px;
   border: none;
-  font-size: 1.2em;
+  font-size: 1.6em;
   &:hover {
     background-color: white;
     color: $cyan;

@@ -1,20 +1,17 @@
 <section >
 	<h1 id='discover-title' ui-sref="categories({ category: hero })">
-		Meet your favorite <span>{{ hero }}</span>
+	Meet your favorite <span>{{ hero }}</span>
 	</h1>
-
 	<h2 id='discover-subtitle'>
-		Jam with your favorite artist, get inspired by industry leaders, or impress your friends with a backstage selfie.
+	Jam with your favorite artist, get inspired by industry leaders, or impress your friends with a backstage selfie.
 	</h2>
-
 	<div class='container'>
 		<div class="row">
 			<div class="col-xl-4 col-lg-4 col-md-4 col-sm-6 col-xs-11" id="wrappedLi" ng-repeat="category in categories">
-				<li id='wrapper' ui-sref="categories({ category: category.label })" class='category-header btn btn-default search-btn {{ category.label }}'>
+				<li id='wrapper' ui-sref="categories({ category: category.label })" class='grow category-header btn btn-default search-btn {{ category.label }}'>
 					<p id='category-label'>{{ category.label }}</p>
 				</li>
 			</div>
 		</div>
 	</div>
-
 </section>

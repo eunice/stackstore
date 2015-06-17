@@ -1,6 +1,18 @@
-<h1>{{ user.displayName }} | {{ user.userType }}</h1>
+<div class="page-header">
+	<h1>{{ user.displayName }} <span id='cart-btn'  ui-sref='store({id: user._id})'ng-if='user.userType ==="Hero"'><i class="fa fa-shopping-cart"></i></span></h1>
+</div>
 <h2>{{ user.description }}</h2>
-
-<div id='profile-photo-div'>
-	<img id='profile-photo' src=" {{ user.photo }}" alt="">
+<img src="{{image}}" alt="">
+<div id ='profile-reviews' class='container'>
+	<h2>Reviews</h2>
+	<div ng-repeat='review in user.reviews'>
+		<a ng-click='toProfile(review.userId._id)' href='#'>{{ review.userId.displayName || review.userId.email }}:</a>
+		<p> {{review.review}}</p>
+		<div class="form-group">
+			<rating readonly="true" ng-model="review.stars" max="5"></rating>
+		</div>
+	</div>
+	<div id='profile-photo-div'>
+		<img id='profile-photo' src=" {{ user.photo }}" alt="">
+	</div>
 </div>

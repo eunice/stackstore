@@ -6,6 +6,16 @@ var mongoose = require('mongoose');
 var bodyParser = require('body-parser');
 var deepPopulate = require('mongoose-deep-populate');
 
+router.get('/', function (req, res, next) {
+    mongoose.model('Product')
+    .find()
+    .exec()
+    .then(function(products){
+        res.json(products);
+    },next)
+
+});
+
 router.get('/?', function (req, res, next) {
     var query;
     var arr = [];

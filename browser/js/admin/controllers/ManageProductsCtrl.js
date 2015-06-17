@@ -27,18 +27,14 @@ app.controller('ManageProductsCtrl', function ($location, $scope, AdminFactory, 
   }
 
   $scope.getCategory = function(category) {
-    console.log('getCategory', category)
 
     AdminFactory.getProducts(category).then(function(product) {
-      console.log('display product', product)
       $scope.products = product;
     })
 
   }
 
   $scope.createProduct = function() {
-    console.log('createproduct controller')
-
     var modalInstance = $modal.open({
       templateUrl: 'js/admin/template/createProducts.html',
       controller: 'createProductModalCtrl',

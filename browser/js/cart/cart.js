@@ -16,6 +16,14 @@ app.controller('CartController', function ($scope, $stateParams, GetProductsForC
 	$scope.total = 0;
 	$scope.user;
 
+	function getTotal() {
+		$scope.products.forEach(function(product) {
+			var id = product._id
+			if ($scope.productIds[id]) {
+				$scope.total += product.price * $scope.productIds[id]
+			}
+		})
+	}
 
 	$scope.getProductIds = function () {
 		AuthService.getLoggedInUser().then(function(user) {
@@ -27,6 +35,7 @@ app.controller('CartController', function ($scope, $stateParams, GetProductsForC
 						$scope.productIds = itemIds;
 						$scope.idArray = Object.keys($scope.productIds);
 						getItems();
+						
 					})
 			} else {
 				$scope.productIds = LocalStorage.getCart();
@@ -45,10 +54,7 @@ app.controller('CartController', function ($scope, $stateParams, GetProductsForC
 		})
 		if (AuthService.isAuthenticated())
 			return Storage.removeItemFromCart(itemId)
-		.then(function() {
-			$scope.products.splice($scope.products.indexOf(itemId),1);
 
-		})
 		else
 			return LocalStorage.removeItemFromCart(itemId);
 	};
@@ -57,6 +63,8 @@ app.controller('CartController', function ($scope, $stateParams, GetProductsForC
 		return GetProductsForCategory.getById($scope.idArray)
 		.then(function (products) {
 			$scope.products = products;
+			console.log($scope.productIds)
+			getTotal();
 		});
 	}
 
@@ -76,6 +84,12 @@ app.controller('CartController', function ($scope, $stateParams, GetProductsForC
 		})
 		
 	};
+
+	$scope.editCart = function() {
+		console.log('edit')
+		$scope.openEdit();
+
+	}
 
 	function sumPrice () {
 		$scope.cart.items.forEach(function (item) {
@@ -121,6 +135,27 @@ app.controller('CartController', function ($scope, $stateParams, GetProductsForC
 			resolve: {
 				items: function () {
 					return $scope.items;
+				}
+			}
+		});
+
+		modalInstance.result.then(function (selectedItem) {
+			$scope.selected = selectedItem;
+		}, function () {
+			// $log.info('Modal dismissed at: ' + new Date());
+		});
+	};
+
+	$scope.openEdit = function (size) {
+
+		var modalInstance = $modal.open({
+			animation: $scope.animationsEnabled,
+			templateUrl: 'js/cart/editCart/editCart.html',
+			controller: 'EditCartController',
+			size: 'lg',
+			resolve: {
+				products: function () {
+					return $scope.products;
 				}
 			}
 		});

@@ -1,4 +1,4 @@
-<div ng-if='!ordered' class='container'>
+<div class="col-lg-8"ng-if='!ordered' class='container'>
 	<ul id='products'>
 		<li id='product' ng-repeat='product in products track by $index'>
 		<div id='product-card' style='background-image: url({{product.img}})'>
@@ -13,7 +13,22 @@
 		</li>
 	</ul>
 </div>
+<div class="col-lg-4"ng-if="!ordered && products.length">
+    <h1>Products</h1>
+    <ul ng-repeat='product in products track by $index'>
+        <li><h4>{{product.title}}</h4></li>
+        <li>{{product.description}}</li>
+        <li>Price: ${{product.price}}</li>
+        <li>Quantity: {{productIds[product._id]}}</li>
+    </ul>
+    <h3>Subtotal: ${{total}}</h3>
+    <h1>
+        <button class='btn btn-primary btn-lg' href='#' ng-if='!ordered && products.length' ng-click='checkout()'>Checkout</button>
+        <button class='btn btn-primary btn-lg' href='#' ng-if='!ordered && products.length' ng-click='editCart()'>Edit Cart</button>
+        <button class='btn btn-primary btn-lg' href='#' ng-if="!user" ng-if="!ordered" ui-sref="login">Sign In</button>
+    </h1>
 
+</div>
 <div ng-if="ordered">
     <div class="modal-header">
         <h3 class="modal-title">Thank you {{order.userId.displayName}}! Your order has been submitted.</h3>
@@ -40,10 +55,4 @@
 	<span>Your cart is empty! Head on over to our</span>
 	<span ui-sref="discover"><a href="#">DISCOVER</a></span>
 	<span> page and fill it up!<span>
-</h1>
-<h1>
-	<button class='btn btn-primary btn-lg' href='#' ng-if='!ordered && products.length' ng-click='checkout()'>Checkout</button>
-</h1>
-<h1>
-	<button class='btn btn-primary btn-lg' href='#' ng-if="!user" ng-if="!ordered" ui-sref="login">Sign In</button>
 </h1>

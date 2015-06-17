@@ -8,9 +8,10 @@ app.config(function($stateProvider) {
 	});
 });
 
-app.controller('ProfileController', function ($scope, $stateParams, User, GetProductsForCategory) {
+app.controller('ProfileController', function ($scope, $stateParams, User, GetProductsForCategory, Hero) {
 	$scope.user = null;
 	$scope.image;
+	$scope.products;
 	$scope.getUser = function (id) {
 		User.getAll($stateParams.id)
 		.then(function (user) {
@@ -22,4 +23,9 @@ app.controller('ProfileController', function ($scope, $stateParams, User, GetPro
 	};
 	GetProductsForCategory.getById
 	$scope.getUser();
+	Hero.getProducts()
+	.then(function (products) {
+		$scope.products = products;
+		console.log('products', $scope.products)
+	})
 });

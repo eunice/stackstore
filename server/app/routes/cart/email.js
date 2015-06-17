@@ -1,6 +1,20 @@
 var mandrill = require('mandrill-api/mandrill');
 var mandrill_client = new mandrill.Mandrill('vDMsj0tlxEj5ONebunR34g');
 
+var subtotal = 0;
+function itemsGenerator (items) {
+  var cartInfo = "";
+  items.forEach(function(item){
+    subtotal+=(item.price*item.quantity);
+    return cartInfo +=
+    "<p> Product: " + item.productId.title + "</p>" +
+    "<p> Price: $" + item.price + "</p>" +
+    "<p> Quantity: " + item.quantity + "</p>" +
+    "<p><img src=\' " + item.productId.img + "\' width='50' height='50'></p>";
+  })
+  return cartInfo;
+}
+
 var emailSender = function (info) {
   // var template_name = "example template_name";
   // var template_content = [{
@@ -8,19 +22,37 @@ var emailSender = function (info) {
   //       "content": "example content"
   //   }];
 
-  console.log('email sending',info)
+  console.log('email info',info)
+  console.log('email items',info.items[0].productId)
 
-  var template_name = "order-notification";
+  // itemsGenerator(info.orders)
+
+  var template_name = "hero-ticket";
   var template_content = [
     {
-        "name": "orderid",
-        "content": "<li>Order ID: " + info._id + "</li>"
+      "name": "orderid",
+      "content": "<p>Order ID: " + info._id + "</p>"
+    },
+    {
+      "name":"date",
+      "content": "<p>Date Created: " + info.dateCreated + "</p>"
+    },
+    {
+      "name":"address",
+      "content": "<p>Shipping Address: 5 Hanover Square, New York, NY, 10004</p>"
+    },
+    {
+      "name":"item",
+      "content": itemsGenerator(info.items)
+    },
+    {
+      "name":"subtotal",
+      "content": "<p> Subtotal: $" + subtotal + "</p>"
     }
+
     ];
 
   var message = {
-    // "html": "<p>Hello</p>",
-    // "text": "This is the text content",
     "subject": "Your order is received",
     "from_email": "order@meetyourhero.com",
     "from_name": "MeetYourHero",
@@ -28,16 +60,23 @@ var emailSender = function (info) {
             "email": "eueu.lee@gmail.com",
             "name": "Eunice",
             "type": "to"
-        }],
+        },
+        {
+        "email": "robbieferguson139@gmail.com",
+        "name": "Robbie",
+        "type": "to"
+      },
+      {
+      "email": "kylelussier3@gmail.com",
+      "name": "Kyle",
+      "type": "to"
+      }
+
+        ],
     "headers": {
         "Reply-To": "message.reply@example.com"
     }
-    // ,
-    // "images": [{
-    //         "type": "image/png",
-    //         "name": "IMAGECID",
-    //         "content": "ZXhhbXBsZSBmaWxl"
-    //     }]
+
 };
 
 var async = false;

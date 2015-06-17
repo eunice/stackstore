@@ -1,0 +1,32 @@
+<div class="modal-header">
+  <h3> Edit Cart Details</h3>
+</div>
+<div class="modal-body">
+<form id="product-form" name="productForm" ng-submit="productForm.$valid && editProductDetail(product)">
+    <div ng-repeat="product in products">
+      <div class="form-group">
+          <label for="title">Title</label>
+          <input type="text" name="title" ng-model="product.title" class="form-control" id="product-title">
+      </div>
+
+      <div class="form-group">
+          <label for="description">Description</label>
+          <input type="text" name="description" ng-model="product.description" class="form-control" id="product-description">
+      </div>
+
+      <div class="form-group">
+          <label for="quantity">Quantity</label>
+          <input type="number" name="quantity" ng-model="product.quantity" class="form-control" id="product-quantity">
+      </div>
+    </div>
+
+    <div>
+      <alert type="success" ng-show="showAlert">Product information updated successfully!</alert>
+    </div>
+
+    <button type="submit" class="btn btn-default">Submit</button>
+</form>
+</div>
+  <div class="modal-footer">
+    <button class="btn btn-primary" ng-click="close()">Close</button>
+  </div>
